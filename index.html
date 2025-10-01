@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈鹏羽 - 数据科学研究生</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --light-gold: #F4E4BC;
+            --dark-gray: #1a1a1a;
+            --mid-gray: #4a4a4a;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.02) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        /* 主要区域 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            padding: 5rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        section:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        /* 首页 Hero 部分 */
+        #home {
+            background: 
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #1a1a1a 100%);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"),
+                radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #1a1a1a 100%);
+            color: var(--white);
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--light-gold);
+            font-weight: 300;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gold);
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-box {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: var(--dark-gray);
+            animation: fadeInRight 1s ease;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .profile-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
+            z-index: -1;
+            opacity: 0.5;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 关于部分 */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-gray);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.05);
+            position: relative;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .info-card:hover::after {
+            width: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        .info-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: var(--gold);
+            min-width: 100px;
+        }
+
+        /* 技能部分 */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .skill-group {
+            background: var(--white);
+            padding: 1.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-group:hover::before {
+            opacity: 1;
+        }
+
+        .skill-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            border-left-width: 6px;
+        }
+
+        .skill-group-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .skill-group-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .skill-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skill-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-main:last-child {
+            border-bottom: none;
+        }
+
+        .skill-name-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .skill-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            transition: color 0.3s ease;
+        }
+
+        .skill-tools {
+            font-size: 0.85rem;
+            color: var(--mid-gray);
+            font-weight: 300;
+            line-height: 1.3;
+        }
+
+        .skill-level {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .level-proficient {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .level-competent {
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.1) 0%, rgba(74, 74, 74, 0.05) 100%);
+            color: var(--mid-gray);
+            border: 1px solid rgba(74, 74, 74, 0.2);
+        }
+
+        .level-familiar {
+            background: linear-gradient(135deg, rgba(74, 74, 74, 0.08) 0%, rgba(74, 74, 74, 0.03) 100%);
+            color: var(--mid-gray);
+            border: 1px solid rgba(74, 74, 74, 0.15);
+        }
+
+        .skill-group:hover .skill-name {
+            color: var(--gold);
+        }
+
+        /* 全宽度的技能组 */
+        .skill-group.full-width {
+            grid-column: span 2;
+        }
+
+        /* 响应式设计 - 技能部分 */
+        @media (max-width: 992px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .skill-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        /* 经验部分 */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            width: 100%;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--gold);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border-radius: 50%;
+            border: 3px solid var(--white);
+        }
+
+        .timeline-date {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+        }
+
+        .timeline-company {
+            color: var(--mid-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* 联系部分 */
+        #contact {
+            background: 
+                linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%),
+                linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
+                linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%),
+                linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+            color: var(--white);
+            padding: 3rem 0;
+            min-height: auto;
+            position: relative;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 10%, rgba(212, 175, 55, 0.2) 50%, transparent 90%);
+        }
+
+        .contact-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        #contact .section-title {
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        #contact .section-title::after {
+            background: var(--gold);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact-info-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--white);
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--gold);
+        }
+
+        .contact-item-icon {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .contact-item-text {
+            font-size: 1rem;
+        }
+
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--light-gold);
+        }
+
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--light-gray);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* 动画 */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-group.full-width {
+                grid-column: span 1;
+            }
+            
+            .skill-group.full-width .skill-items {
+                display: flex !important;
+                flex-direction: column;
+            }
+            
+            .skill-group.full-width .skill-main {
+                border-left: none !important;
+                padding-left: 0 !important;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            .skill-group.full-width .skill-main:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+
+            section {
+                padding: 3rem 0;
+                min-height: auto;
+            }
+
+            .contact-info-wrapper {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {            
+            .contact-info-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#about" class="nav-link">关于</a></li>
+                <li><a href="#skills" class="nav-link">技能</a></li>
+                <li><a href="#experience" class="nav-link">项目</a></li>
+                <li><a href="#contact" class="nav-link">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>陈鹏羽</h1>
+                    <h2>数据科学研究生</h2>
+                    <p>
+                        莫纳什大学数据科学硕士在读，拥有扎实的统计学基础和丰富的数据分析经验。
+                        擅长机器学习、大数据处理和数据可视化，致力于用数据驱动决策，创造价值。
+                    </p>
+                    <a href="#contact" class="cta-button">联系我</a>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-box">羽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于 -->
+    <section id="about">
+        <div class="container">
+            <div style="width: 100%;">
+                <h2 class="section-title">关于我</h2>
+                <div class="about-grid">
+                    <div class="info-card">
+                        <div class="info-item">
+                            <span class="info-label">姓名：</span>
+                            <span>陈鹏羽</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">性别：</span>
+                            <span>男</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">学历：</span>
+                            <span>硕士在读</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">学校：</span>
+                            <span>莫纳什大学</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">专业：</span>
+                            <span>数据科学</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">语言：</span>
+                            <span>中文、英文</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3 style="margin-bottom: 1rem; color: var(--gold);">教育背景</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="color: var(--dark-gray); margin-bottom: 0.5rem;">莫纳什大学 (QS 35)</h4>
+                            <p style="color: var(--mid-gray); font-size: 0.95rem; margin-bottom: 0.3rem;">
+                                <strong>数据科学硕士</strong> | 2024 - 至今
+                            </p>
+                            <p style="line-height: 1.6; color: var(--mid-gray); font-size: 0.9rem;">
+                                主修课程：数据清洗（Data Wrangling）、机器学习（Machine Learning）、数据库概论、大数据处理（Data Processing for Big Data）
+                            </p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--dark-gray); margin-bottom: 0.5rem;">浙大城市学院</h4>
+                            <p style="color: var(--mid-gray); font-size: 0.95rem; margin-bottom: 0.3rem;">
+                                <strong>大数据技术与数据科学学士</strong> | 2019 - 2023
+                            </p>
+                            <p style="line-height: 1.6; color: var(--mid-gray); font-size: 0.9rem;">
+                                主修课程：贝叶斯统计、统计建模、数值计算方法
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills">
+        <div class="container">
+            <div style="width: 100%;">
+                <h2 class="section-title">专业技能</h2>
+                <div class="skills-container">
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">编程语言</h3>
+                        <div class="skill-items">
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">Python</div>
+                                    <div class="skill-tools">NumPy, Pandas, Matplotlib, Scikit-learn</div>
+                                </div>
+                                <span class="skill-level level-proficient">熟练</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">R</div>
+                                    <div class="skill-tools">data.table, ggplot2, dplyr, tidyverse</div>
+                                </div>
+                                <span class="skill-level level-proficient">熟练</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">SQL</div>
+                                    <div class="skill-tools">查询优化, 数据建模</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">机器学习</h3>
+                        <div class="skill-items">
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">深度学习</div>
+                                    <div class="skill-tools">PyTorch, 神经网络</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">传统ML</div>
+                                    <div class="skill-tools">Sklearn, 随机森林, SVM</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">PySpark MLlib</div>
+                                    <div class="skill-tools">分布式机器学习</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">数据处理</h3>
+                        <div class="skill-items">
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">数据清洗</div>
+                                    <div class="skill-tools">ETL, 数据质量控制, 异常检测</div>
+                                </div>
+                                <span class="skill-level level-proficient">熟练</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">数据可视化</div>
+                                    <div class="skill-tools">Matplotlib, ggplot2</div>
+                                </div>
+                                <span class="skill-level level-proficient">熟练</span>
+                            </div>
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">PySpark</div>
+                                    <div class="skill-tools">大数据处理, 分布式计算</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">统计分析</h3>
+                        <div class="skill-items">
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">统计建模</div>
+                                    <div class="skill-tools">回归分析, 时间序列, 假设检验</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-group full-width">
+                        <h3 class="skill-group-title">应用开发</h3>
+                        <div class="skill-items" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                            <div class="skill-main">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">Web框架</div>
+                                    <div class="skill-tools">R Shiny</div>
+                                </div>
+                                <span class="skill-level level-competent">掌握</span>
+                            </div>
+                            <div class="skill-main" style="border-left: 1px solid rgba(0,0,0,0.05); padding-left: 1rem;">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">GUI开发</div>
+                                    <div class="skill-tools">Qt Designer</div>
+                                </div>
+                                <span class="skill-level level-familiar">使用过</span>
+                            </div>
+                            <div class="skill-main" style="border-left: 1px solid rgba(0,0,0,0.05); padding-left: 1rem;">
+                                <div class="skill-name-wrapper">
+                                    <div class="skill-name">API集成</div>
+                                    <div class="skill-tools">OpenAI API, 异步编程</div>
+                                </div>
+                                <span class="skill-level level-familiar">使用过</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 经历 -->
+    <section id="experience">
+        <div class="container">
+            <div style="width: 100%;">
+                <h2 class="section-title">项目与经历</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - 至今</div>
+                        <div class="timeline-title">加拿大鸟类分布交互式可视化探索平台</div>
+                        <div class="timeline-company">个人项目 | <a href="https://tlsurl.com/vBird" target="_blank" style="color: var(--gold);">在线展示</a> | <a href="https://tlsurl.com/vBird_git" target="_blank" style="color: var(--gold);">GitHub</a></div>
+                        <p>基于R Shiny设计的响应式可视化探索平台，通过使用预计算的气温格点数据与鸟类观测数据降低实时资源计算负载。采用响应式设计增加使用流畅度，为生态研究提供数据支持。</p>
+                        <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技术栈：R Shiny, ggplot2, 数据可视化</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - 至今</div>
+                        <div class="timeline-title">基于屏幕捕捉的自然语言聊天框</div>
+                        <div class="timeline-company">个人项目 | <a href="https://tlsurl.com/lotus" target="_blank" style="color: var(--gold);">GitHub</a></div>
+                        <p>使用Qt Designer搭建UI逻辑框架，利用Python中的MSS包进行屏幕捕捉，使用base64进行格式转换后利用OpenAI的API调用大模型进行语言生成。利用QThread实现异步设计，保证使用的流畅性。</p>
+                        <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技术栈：Python, Qt Designer, OpenAI API, 异步编程</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022.09-10 & 2023.01-02</div>
+                        <div class="timeline-title">研究助理</div>
+                        <div class="timeline-company">深圳市赛盈地脉技术有限公司</div>
+                        <p>参与公司数据分析项目，负责数据收集、清洗和预处理工作。运用Python进行数据分析，协助建立统计模型，为业务决策提供数据支持。</p>
+                        <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技能应用：Python, 数据分析, 统计建模</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 3rem; margin-bottom: 2rem; color: var(--dark-gray); font-size: 1.8rem;">其他亮点</h3>
+                <div style="background: var(--white); padding: 2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border-left: 4px solid var(--gold);">
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--gold); margin-bottom: 0.5rem;">语言能力</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem; padding-left: 1rem;">• 中文：母语</li>
+                            <li style="padding-left: 1rem;">• 英文：雅思7.0，能流利交流与阅读专业文献</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gold); margin-bottom: 0.5rem;">兴趣爱好</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem; padding-left: 1rem;">• 小提琴演奏（业余十级）</li>
+                            <li style="padding-left: 1rem;">• 基于生成式AI模型的音乐创作</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系 -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">联系方式</h2>
+                <div class="contact-info-wrapper">
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📧</span>
+                        <span class="contact-item-text">
+                            <a href="mailto:your.email@example.com">your.email@example.com</a>
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📱</span>
+                        <span class="contact-item-text">+61 XXX XXX XXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">💼</span>
+                        <span class="contact-item-text">
+                            <a href="#" target="_blank">LinkedIn</a>
+                        </span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">🐙</span>
+                        <span class="contact-item-text">
+                            <a href="#" target="_blank">GitHub</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="footer-note">
+                    © 2025 陈鹏羽 | 感谢您的关注
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 平滑滚动和活动导航链接
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // 滚动监听，高亮当前部分
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
