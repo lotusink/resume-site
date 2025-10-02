@@ -274,76 +274,231 @@
             background: var(--gold);
         }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            width: 100%;
-        }
-
-        .info-card {
+        /* 个人信息栏 */
+        .personal-info-bar {
             background: var(--white);
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(212, 175, 55, 0.05);
-            position: relative;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            border-left: 3px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
 
-        .info-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .info-card:hover::after {
-            width: 100%;
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border-color: rgba(212, 175, 55, 0.15);
-        }
-
-        .info-item {
-            margin-bottom: 1rem;
+        .info-item-inline {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
-        .info-label {
-            font-weight: bold;
+        .info-label-inline {
+            font-weight: 600;
             color: var(--gold);
-            min-width: 100px;
+            font-size: 0.9rem;
         }
 
-        /* 技能部分 */
-        .skills-container {
+        .info-value-inline {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        /* 教育背景卡片 */
+        .education-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             width: 100%;
-            max-width: 100%;
         }
 
-        .skill-group {
+        .education-card {
             background: var(--white);
-            padding: 1.75rem;
+            padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--gold);
+            transition: transform 0.3s ease;
+            border-top: 3px solid var(--gold);
             position: relative;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .edu-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .edu-university {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-degree {
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .edu-period {
+            font-size: 0.9rem;
+            color: var(--mid-gray);
+        }
+
+        .edu-courses {
+            margin-top: 1rem;
+        }
+
+        .courses-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.75rem;
+        }
+
+        /* 课程列表优化 */
+        .courses-list {
+            list-style: none;
+            padding: 0;
             overflow: hidden;
         }
 
-        .skill-group::before {
+        .course-item {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--mid-gray);
+            transform: translateZ(0); /* GPU加速 */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 50px;
+            opacity: 1;
+        }
+
+        .course-item::before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: var(--gold);
+        }
+
+        .course-item.hidden {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin: 0;
+            pointer-events: none;
+            transform: translateX(-10px) translateZ(0);
+        }
+
+        /* 课程展开动画延迟 */
+        .courses-list.expanding .course-item:nth-child(6) { transition-delay: 0.05s; }
+        .courses-list.expanding .course-item:nth-child(7) { transition-delay: 0.1s; }
+        .courses-list.expanding .course-item:nth-child(8) { transition-delay: 0.15s; }
+        .courses-list.expanding .course-item:nth-child(9) { transition-delay: 0.2s; }
+
+        .courses-list.collapsing .course-item {
+            transition-delay: 0s !important;
+        }
+
+        .course-expand-btn {
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            width: auto;
+            transform: translateZ(0);
+        }
+
+        .course-expand-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-1px) translateZ(0);
+        }
+
+        .course-expand-btn.expanded {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        /* 技能部分 */
+        .skills-wrapper {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            will-change: transform, opacity;
+            transform: translateZ(0); /* GPU加速 */
+        }
+
+        /* 优化的隐藏/显示动画 */
+        .skill-card.hidden {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-20px) translateZ(0);
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top-width: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card.visible {
+            max-height: 300px;
+            opacity: 1;
+            transform: translateY(0) translateZ(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 批量动画 - 使用CSS动画延迟 */
+        .skills-container.expanding .skill-card:nth-child(4) { transition-delay: 0.05s; }
+        .skills-container.expanding .skill-card:nth-child(5) { transition-delay: 0.1s; }
+        .skills-container.expanding .skill-card:nth-child(6) { transition-delay: 0.15s; }
+        .skills-container.expanding .skill-card:nth-child(7) { transition-delay: 0.2s; }
+        .skills-container.expanding .skill-card:nth-child(8) { transition-delay: 0.25s; }
+        .skills-container.expanding .skill-card:nth-child(9) { transition-delay: 0.3s; }
+        .skills-container.expanding .skill-card:nth-child(10) { transition-delay: 0.35s; }
+        .skills-container.expanding .skill-card:nth-child(11) { transition-delay: 0.4s; }
+        .skills-container.expanding .skill-card:nth-child(12) { transition-delay: 0.45s; }
+        .skills-container.expanding .skill-card:nth-child(13) { transition-delay: 0.5s; }
+        .skills-container.expanding .skill-card:nth-child(14) { transition-delay: 0.55s; }
+        .skills-container.expanding .skill-card:nth-child(15) { transition-delay: 0.6s; }
+
+        .skills-container.collapsing .skill-card {
+            transition-delay: 0s !important;
+        }
+
+        .skill-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -355,80 +510,46 @@
             transition: opacity 0.3s ease;
         }
 
-        .skill-group:hover::before {
+        .skill-card:not(.hidden):hover::before {
             opacity: 1;
         }
 
-        .skill-group:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-            border-left-width: 6px;
+        .skill-card:not(.hidden):hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .skill-group-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+        .skill-category {
+            font-size: 0.85rem;
             color: var(--gold);
-            margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
 
-        .skill-group-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--gold);
-        }
-
-        .skill-items {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .skill-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .skill-main:last-child {
-            border-bottom: none;
-        }
-
-        .skill-name-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-
-        .skill-name {
-            font-size: 1.1rem;
+        .skill-title {
+            font-size: 1.25rem;
             font-weight: 600;
             color: var(--dark-gray);
-            transition: color 0.3s ease;
+            margin-bottom: 0.5rem;
         }
 
-        .skill-tools {
-            font-size: 0.85rem;
-            color: var(--mid-gray);
-            font-weight: 300;
-            line-height: 1.3;
-        }
-
-        .skill-level {
+        .skill-description {
             font-size: 0.9rem;
+            color: var(--mid-gray);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .skill-level-badge {
+            display: inline-block;
             padding: 0.25rem 0.75rem;
-            border-radius: 20px;
+            border-radius: 15px;
+            font-size: 0.85rem;
             font-weight: 500;
-            white-space: nowrap;
+            align-self: flex-start;
         }
 
         .level-proficient {
@@ -438,33 +559,67 @@
         }
 
         .level-competent {
-            background: linear-gradient(135deg, rgba(74, 74, 74, 0.1) 0%, rgba(74, 74, 74, 0.05) 100%);
-            color: var(--mid-gray);
-            border: 1px solid rgba(74, 74, 74, 0.2);
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(74, 144, 226, 0.05) 100%);
+            color: #4A90E2;
+            border: 1px solid rgba(74, 144, 226, 0.25);
         }
 
         .level-familiar {
-            background: linear-gradient(135deg, rgba(74, 74, 74, 0.08) 0%, rgba(74, 74, 74, 0.03) 100%);
-            color: var(--mid-gray);
-            border: 1px solid rgba(74, 74, 74, 0.15);
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.1) 0%, rgba(108, 117, 125, 0.05) 100%);
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.2);
         }
 
-        .skill-group:hover .skill-name {
+        /* 展开按钮 */
+        .skills-expand-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            background: transparent;
             color: var(--gold);
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* 全宽度的技能组 */
-        .skill-group.full-width {
-            grid-column: span 2;
+        .skills-expand-btn:hover {
+            background: var(--gold);
+            color: var(--dark-gray);
+            transform: translateY(-2px);
+        }
+
+        .skills-expand-btn.expanded {
+            background: var(--gold);
+            color: var(--dark-gray);
         }
 
         /* 响应式设计 - 技能部分 */
         @media (max-width: 992px) {
             .skills-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
-            .skill-group.full-width {
-                grid-column: span 1;
+        }
+
+        @media (max-width: 576px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .skill-card {
+                padding: 1.25rem;
+            }
+
+            .skill-title {
+                font-size: 1.1rem;
+            }
+
+            .skill-description {
+                font-size: 0.85rem;
             }
         }
 
@@ -525,6 +680,96 @@
             color: var(--dark-gray);
         }
 
+        .timeline-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .timeline-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .timeline-link:hover {
+            color: var(--light-gold);
+            border-bottom-color: var(--light-gold);
+        }
+
+        .project-description {
+            margin: 1rem 0;
+            padding-left: 0;
+        }
+
+        .project-description p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .project-section {
+            margin-top: 1.5rem;
+        }
+
+        .project-section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .project-section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 16px;
+            background: var(--gold);
+        }
+
+        .project-content {
+            color: var(--mid-gray);
+            line-height: 1.6;
+            padding-left: 1rem;
+        }
+
+        .project-tech-list {
+            list-style: none;
+            padding: 0;
+            padding-left: 1rem;
+        }
+
+        .project-tech-list li {
+            margin-bottom: 0.75rem;
+            color: var(--mid-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .project-tech-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .project-tech-list li strong {
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
         .timeline-company {
             color: var(--mid-gray);
             margin-bottom: 1rem;
@@ -532,10 +777,10 @@
 
         /* 联系部分 */
         #contact {
-            background: 
+            background:
                 linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%),
                 linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
-            background-image: 
+            background-image:
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
                 linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%),
                 linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
@@ -648,22 +893,22 @@
             .skills-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .skill-group.full-width {
                 grid-column: span 1;
             }
-            
+
             .skill-group.full-width .skill-items {
                 display: flex !important;
                 flex-direction: column;
             }
-            
+
             .skill-group.full-width .skill-main {
                 border-left: none !important;
                 padding-left: 0 !important;
                 border-bottom: 1px solid rgba(0,0,0,0.05);
             }
-            
+
             .skill-group.full-width .skill-main:last-child {
                 border-bottom: none;
             }
@@ -674,17 +919,17 @@
             nav {
                 padding: 0.75rem 0;
             }
-            
+
             .nav-container {
                 padding: 0 1rem;
             }
-            
+
             .nav-menu {
                 flex-direction: row;
                 gap: 1rem;
                 font-size: 0.9rem;
             }
-            
+
             .nav-link {
                 padding: 0.4rem 0.6rem;
             }
@@ -699,11 +944,11 @@
             .hero-text h1 {
                 font-size: 2.5rem;
             }
-            
+
             .hero-text h2 {
                 font-size: 1.5rem;
             }
-            
+
             .profile-box {
                 width: 200px;
                 height: 200px;
@@ -711,16 +956,20 @@
             }
 
             /* 关于部分 */
-            .about-grid {
+            .personal-info-bar {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .education-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
 
             /* 时间线 */
             .timeline {
                 padding-left: 20px;
             }
-            
+
             .timeline-item {
                 padding: 1.5rem;
             }
@@ -730,7 +979,7 @@
                 padding: 3rem 0;
                 min-height: auto;
             }
-            
+
             .section-title {
                 font-size: 2rem;
                 margin-bottom: 2rem;
@@ -749,7 +998,7 @@
                 padding: 0.6rem 0;
                 background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
             }
-            
+
             .nav-menu {
                 gap: 0.5rem;
                 font-size: 0.85rem;
@@ -757,12 +1006,12 @@
                 width: 100%;
                 padding: 0;
             }
-            
+
             .nav-link {
                 padding: 0.3rem 0.4rem;
                 font-size: 0.85rem;
             }
-            
+
             .nav-link::after {
                 height: 1px;
             }
@@ -771,41 +1020,41 @@
             .container {
                 padding: 0 1rem;
             }
-            
+
             /* Hero移动端优化 */
             #home {
                 margin-top: 50px;
                 padding: 3rem 0;
             }
-            
+
             .hero-text h1 {
                 font-size: 2rem;
                 margin-bottom: 0.75rem;
             }
-            
+
             .hero-text h2 {
                 font-size: 1.3rem;
                 margin-bottom: 1.5rem;
             }
-            
+
             .hero-text p {
                 font-size: 1rem;
                 line-height: 1.6;
                 margin-bottom: 1.5rem;
             }
-            
+
             .cta-button {
                 padding: 0.8rem 1.6rem;
                 font-size: 0.95rem;
             }
-            
+
             .profile-box {
                 width: 150px;
                 height: 150px;
                 font-size: 4rem;
                 box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
             }
-            
+
             .profile-box::before {
                 animation: rotate 6s linear infinite;
             }
@@ -814,79 +1063,129 @@
             section {
                 padding: 2.5rem 0;
             }
-            
+
             .section-title {
                 font-size: 1.75rem;
                 margin-bottom: 1.5rem;
             }
-            
+
             .section-title::after {
                 width: 40px;
                 height: 2px;
             }
 
-            /* 信息卡片优化 */
-            .info-card {
+            /* 关于部分移动端 */
+            .personal-info-bar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.25rem;
+                align-items: flex-start;
+            }
+
+            .info-item-inline {
+                width: 100%;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .education-card {
                 padding: 1.5rem;
-                margin-bottom: 1rem;
             }
-            
-            .info-item {
-                margin-bottom: 0.75rem;
-                font-size: 0.95rem;
-                gap: 0.5rem;
+
+            .edu-university {
+                font-size: 1.1rem;
             }
-            
-            .info-label {
-                min-width: 70px;
+
+            .course-item {
+                font-size: 0.85rem;
+            }
+
+            /* 项目部分移动端 */
+            .timeline-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .timeline-link {
+                font-size: 0.85rem;
+            }
+
+            .project-description p {
                 font-size: 0.9rem;
+            }
+
+            .project-section-title {
+                font-size: 0.95rem;
+            }
+
+            .project-content {
+                font-size: 0.9rem;
+                padding-left: 0.75rem;
+            }
+
+            .project-tech-list {
+                padding-left: 0.75rem;
+            }
+
+            .project-tech-list li {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+                padding-left: 1rem;
+            }
+
+            .timeline-title {
+                font-size: 1.2rem;
+                line-height: 1.3;
             }
 
             /* 技能部分移动端优化 */
             .skills-container {
                 gap: 1.5rem;
             }
-            
+
             .skill-group {
                 padding: 1.25rem;
                 border-left-width: 3px;
             }
-            
+
             .skill-group:hover {
                 transform: translateY(-3px);
                 border-left-width: 4px;
             }
-            
+
             .skill-group-title {
                 font-size: 1rem;
                 margin-bottom: 0.75rem;
             }
-            
+
             .skill-items {
                 gap: 0.5rem;
             }
-            
+
             .skill-main {
                 flex-direction: column;
                 align-items: flex-start;
                 padding: 0.5rem 0;
                 gap: 0.5rem;
             }
-            
+
             .skill-name-wrapper {
                 width: 100%;
             }
-            
+
             .skill-name {
                 font-size: 1rem;
             }
-            
+
             .skill-tools {
                 font-size: 0.8rem;
                 color: var(--mid-gray);
                 margin-top: 0.2rem;
             }
-            
+
             .skill-level {
                 font-size: 0.85rem;
                 padding: 0.2rem 0.6rem;
@@ -897,49 +1196,49 @@
             .timeline {
                 padding-left: 15px;
             }
-            
+
             .timeline::before {
                 left: 10px;
                 width: 1px;
             }
-            
+
             .timeline-item {
                 padding: 1.25rem;
                 margin-bottom: 2rem;
             }
-            
+
             .timeline-item::before {
                 left: -18px;
                 width: 12px;
                 height: 12px;
                 top: 1.5rem;
             }
-            
+
             .timeline-item:hover {
                 transform: translateX(5px);
             }
-            
+
             .timeline-date {
                 font-size: 0.9rem;
                 margin-bottom: 0.3rem;
             }
-            
+
             .timeline-title {
                 font-size: 1.2rem;
                 line-height: 1.3;
                 margin-bottom: 0.3rem;
             }
-            
+
             .timeline-company {
                 font-size: 0.9rem;
                 margin-bottom: 0.75rem;
             }
-            
+
             .timeline-item p {
                 font-size: 0.95rem;
                 line-height: 1.5;
             }
-            
+
             .timeline-item p:last-child {
                 font-size: 0.85rem;
             }
@@ -948,15 +1247,15 @@
             h3 {
                 font-size: 1.5rem !important;
             }
-            
+
             div[style*="border-left: 4px solid"] {
                 padding: 1.5rem !important;
             }
-            
+
             h4 {
                 font-size: 1rem !important;
             }
-            
+
             ul li {
                 font-size: 0.95rem;
                 padding-left: 0.75rem !important;
@@ -966,16 +1265,16 @@
             #contact {
                 padding: 2.5rem 0;
             }
-            
+
             .contact-info-wrapper {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .contact-item-text {
                 font-size: 0.95rem;
             }
-            
+
             .footer-note {
                 margin-top: 2rem;
                 padding-top: 1.5rem;
@@ -1004,7 +1303,7 @@
                     transform: translateX(0);
                 }
             }
-            
+
             /* 保留噪点纹理但优化性能 */
             body::before {
                 background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.01) 100%);
@@ -1017,33 +1316,33 @@
                 font-size: 0.8rem;
                 gap: 0.3rem;
             }
-            
+
             .nav-link {
                 padding: 0.25rem 0.3rem;
             }
-            
+
             .hero-text h1 {
                 font-size: 1.75rem;
             }
-            
+
             .hero-text h2 {
                 font-size: 1.1rem;
             }
-            
+
             .profile-box {
                 width: 120px;
                 height: 120px;
                 font-size: 3rem;
             }
-            
+
             .section-title {
                 font-size: 1.5rem;
             }
-            
+
             .skill-group {
                 padding: 1rem;
             }
-            
+
             .timeline-item {
                 padding: 1rem;
             }
@@ -1056,21 +1355,21 @@
                 display: flex;
                 align-items: center;
             }
-            
+
             .cta-button {
                 min-height: 44px;
             }
-            
+
             .contact-item a {
                 padding: 0.5rem;
                 display: inline-block;
             }
-            
+
             /* 移除hover效果，改为tap效果 */
             .skill-group:active {
                 transform: scale(0.98);
             }
-            
+
             .timeline-item:active {
                 transform: scale(0.98);
             }
@@ -1116,52 +1415,73 @@
         <div class="container">
             <div style="width: 100%;">
                 <h2 class="section-title">关于我</h2>
-                <div class="about-grid">
-                    <div class="info-card">
-                        <div class="info-item">
-                            <span class="info-label">姓名：</span>
-                            <span>陈鹏羽</span>
+
+                <!-- 个人信息栏 -->
+                <div class="personal-info-bar">
+                    <div class="info-item-inline">
+                        <span class="info-label-inline">姓名：</span>
+                        <span class="info-value-inline">陈鹏羽</span>
+                    </div>
+                    <div class="info-item-inline">
+                        <span class="info-label-inline">性别：</span>
+                        <span class="info-value-inline">男</span>
+                    </div>
+                    <div class="info-item-inline">
+                        <span class="info-label-inline">学历：</span>
+                        <span class="info-value-inline">硕士在读</span>
+                    </div>
+                    <div class="info-item-inline">
+                        <span class="info-label-inline">专业：</span>
+                        <span class="info-value-inline">数据科学</span>
+                    </div>
+                    <div class="info-item-inline">
+                        <span class="info-label-inline">语言：</span>
+                        <span class="info-value-inline">中文、英文</span>
+                    </div>
+                </div>
+
+                <!-- 教育背景网格 -->
+                <div class="education-grid">
+                    <!-- 莫纳什大学 -->
+                    <div class="education-card" id="monash-card">
+                        <div class="edu-header">
+                            <h3 class="edu-university">莫纳什大学 (QS 35)</h3>
+                            <p class="edu-degree">数据科学硕士</p>
+                            <p class="edu-period">2024 - 至今</p>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">性别：</span>
-                            <span>男</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">学历：</span>
-                            <span>硕士在读</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">学校：</span>
-                            <span>莫纳什大学</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">专业：</span>
-                            <span>数据科学</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">语言：</span>
-                            <span>中文、英文</span>
+                        <div class="edu-courses">
+                            <h4 class="courses-title">主修课程：</h4>
+                            <ul class="courses-list">
+                                <li class="course-item">数据清洗 (Data Wrangling)</li>
+                                <li class="course-item">机器学习 (Machine Learning)</li>
+                                <li class="course-item">数据库概论 (Introduction to Databases)</li>
+                                <li class="course-item">大数据处理 (Data Processing for Big Data)</li>
+                                <li class="course-item">计算机网络与架构 (Computer Architecture and Networks)</li>
+                                <li class="course-item hidden">Python编程 (Algorithms and Programming in Python)</li>
+                                <li class="course-item hidden">项目管理 (Project Management)</li>
+                                <li class="course-item hidden">IT研究方法 (IT Research and Innovation Methods)</li>
+                                <li class="course-item hidden">生物信息学 (Introduction to Bioinformatics)</li>
+                            </ul>
+                            <button class="course-expand-btn" onclick="toggleCourses(this, 'monash-card')">
+                                <span class="expand-text">查看全部</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <h3 style="margin-bottom: 1rem; color: var(--gold);">教育背景</h3>
-                        <div style="margin-bottom: 1.5rem;">
-                            <h4 style="color: var(--dark-gray); margin-bottom: 0.5rem;">莫纳什大学 (QS 35)</h4>
-                            <p style="color: var(--mid-gray); font-size: 0.95rem; margin-bottom: 0.3rem;">
-                                <strong>数据科学硕士</strong> | 2024 - 至今
-                            </p>
-                            <p style="line-height: 1.6; color: var(--mid-gray); font-size: 0.9rem;">
-                                主修课程：数据清洗（Data Wrangling）、机器学习（Machine Learning）、数据库概论、大数据处理（Data Processing for Big Data）
-                            </p>
+
+                    <!-- 浙大城市学院 -->
+                    <div class="education-card" id="zucc-card">
+                        <div class="edu-header">
+                            <h3 class="edu-university">浙大城市学院</h3>
+                            <p class="edu-degree">大数据技术与数据科学学士</p>
+                            <p class="edu-period">2019 - 2023</p>
                         </div>
-                        <div>
-                            <h4 style="color: var(--dark-gray); margin-bottom: 0.5rem;">浙大城市学院</h4>
-                            <p style="color: var(--mid-gray); font-size: 0.95rem; margin-bottom: 0.3rem;">
-                                <strong>大数据技术与数据科学学士</strong> | 2019 - 2023
-                            </p>
-                            <p style="line-height: 1.6; color: var(--mid-gray); font-size: 0.9rem;">
-                                主修课程：贝叶斯统计、统计建模、数值计算方法
-                            </p>
+                        <div class="edu-courses">
+                            <h4 class="courses-title">主修课程：</h4>
+                            <ul class="courses-list">
+                                <li class="course-item">贝叶斯统计</li>
+                                <li class="course-item">统计建模</li>
+                                <li class="course-item">数值计算方法</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1172,130 +1492,121 @@
     <!-- 技能 -->
     <section id="skills">
         <div class="container">
-            <div style="width: 100%;">
+            <div class="skills-wrapper">
                 <h2 class="section-title">专业技能</h2>
                 <div class="skills-container">
-                    <div class="skill-group">
-                        <h3 class="skill-group-title">编程语言</h3>
-                        <div class="skill-items">
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">Python</div>
-                                    <div class="skill-tools">NumPy, Pandas, Matplotlib, Scikit-learn</div>
-                                </div>
-                                <span class="skill-level level-proficient">熟练</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">R</div>
-                                    <div class="skill-tools">data.table, ggplot2, dplyr, tidyverse</div>
-                                </div>
-                                <span class="skill-level level-proficient">熟练</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">SQL</div>
-                                    <div class="skill-tools">查询优化, 数据建模</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                        </div>
+                    <!-- 熟练技能 -->
+                    <div class="skill-card" data-level="proficient">
+                        <div class="skill-category">编程语言</div>
+                        <h3 class="skill-title">Python</h3>
+                        <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
+                        <span class="skill-level-badge level-proficient">熟练</span>
                     </div>
 
-                    <div class="skill-group">
-                        <h3 class="skill-group-title">机器学习</h3>
-                        <div class="skill-items">
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">深度学习</div>
-                                    <div class="skill-tools">PyTorch, 神经网络</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">传统ML</div>
-                                    <div class="skill-tools">Sklearn, 随机森林, SVM</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">PySpark MLlib</div>
-                                    <div class="skill-tools">分布式机器学习</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-level="proficient">
+                        <div class="skill-category">编程语言</div>
+                        <h3 class="skill-title">R语言</h3>
+                        <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
+                        <span class="skill-level-badge level-proficient">熟练</span>
                     </div>
 
-                    <div class="skill-group">
-                        <h3 class="skill-group-title">数据处理</h3>
-                        <div class="skill-items">
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">数据清洗</div>
-                                    <div class="skill-tools">ETL, 数据质量控制, 异常检测</div>
-                                </div>
-                                <span class="skill-level level-proficient">熟练</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">数据可视化</div>
-                                    <div class="skill-tools">Matplotlib, ggplot2</div>
-                                </div>
-                                <span class="skill-level level-proficient">熟练</span>
-                            </div>
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">PySpark</div>
-                                    <div class="skill-tools">大数据处理, 分布式计算</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-level="proficient">
+                        <div class="skill-category">数据处理</div>
+                        <h3 class="skill-title">数据清洗</h3>
+                        <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
+                        <span class="skill-level-badge level-proficient">熟练</span>
                     </div>
 
-                    <div class="skill-group">
-                        <h3 class="skill-group-title">统计分析</h3>
-                        <div class="skill-items">
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">统计建模</div>
-                                    <div class="skill-tools">回归分析, 时间序列, 假设检验</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                        </div>
+                    <!-- 初始隐藏的熟练技能 -->
+                    <div class="skill-card hidden" data-level="proficient">
+                        <div class="skill-category">数据处理</div>
+                        <h3 class="skill-title">数据可视化</h3>
+                        <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
+                        <span class="skill-level-badge level-proficient">熟练</span>
                     </div>
 
-                    <div class="skill-group full-width">
-                        <h3 class="skill-group-title">应用开发</h3>
-                        <div class="skill-items" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                            <div class="skill-main">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">Web框架</div>
-                                    <div class="skill-tools">R Shiny</div>
-                                </div>
-                                <span class="skill-level level-competent">掌握</span>
-                            </div>
-                            <div class="skill-main" style="border-left: 1px solid rgba(0,0,0,0.05); padding-left: 1rem;">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">GUI开发</div>
-                                    <div class="skill-tools">Qt Designer</div>
-                                </div>
-                                <span class="skill-level level-familiar">使用过</span>
-                            </div>
-                            <div class="skill-main" style="border-left: 1px solid rgba(0,0,0,0.05); padding-left: 1rem;">
-                                <div class="skill-name-wrapper">
-                                    <div class="skill-name">API集成</div>
-                                    <div class="skill-tools">OpenAI API, 异步编程</div>
-                                </div>
-                                <span class="skill-level level-familiar">使用过</span>
-                            </div>
-                        </div>
+                    <!-- 掌握技能 -->
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">大数据</div>
+                        <h3 class="skill-title">PySpark</h3>
+                        <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">分布式机器学习</div>
+                        <h3 class="skill-title">分布式模型开发</h3>
+                        <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">数据库</div>
+                        <h3 class="skill-title">SQL</h3>
+                        <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">机器学习</div>
+                        <h3 class="skill-title">深度学习</h3>
+                        <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">机器学习</div>
+                        <h3 class="skill-title">传统机器学习</h3>
+                        <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">统计分析</div>
+                        <h3 class="skill-title">统计建模</h3>
+                        <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="competent">
+                        <div class="skill-category">Web开发</div>
+                        <h3 class="skill-title">R Shiny</h3>
+                        <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
+                        <span class="skill-level-badge level-competent">掌握</span>
+                    </div>
+
+                    <!-- 了解技能 -->
+                    <div class="skill-card hidden" data-level="familiar">
+                        <div class="skill-category">编程语言</div>
+                        <h3 class="skill-title">C语言</h3>
+                        <p class="skill-description">系统编程基础，数据结构实现</p>
+                        <span class="skill-level-badge level-familiar">了解</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="familiar">
+                        <div class="skill-category">编程语言</div>
+                        <h3 class="skill-title">Java</h3>
+                        <p class="skill-description">面向对象编程，基础应用开发</p>
+                        <span class="skill-level-badge level-familiar">了解</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="familiar">
+                        <div class="skill-category">GUI开发</div>
+                        <h3 class="skill-title">Qt Designer</h3>
+                        <p class="skill-description">桌面应用界面设计与开发</p>
+                        <span class="skill-level-badge level-familiar">了解</span>
+                    </div>
+
+                    <div class="skill-card hidden" data-level="familiar">
+                        <div class="skill-category">API集成</div>
+                        <h3 class="skill-title">OpenAI API</h3>
+                        <p class="skill-description">大语言模型API调用，异步编程实践</p>
+                        <span class="skill-level-badge level-familiar">了解</span>
                     </div>
                 </div>
+                <button class="skills-expand-btn" onclick="toggleSkills(this)">
+                    <span class="btn-text">查看全部技能</span>
+                </button>
             </div>
         </div>
     </section>
@@ -1308,18 +1619,62 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-date">2023 - 至今</div>
-                        <div class="timeline-title">加拿大鸟类分布交互式可视化探索平台</div>
-                        <div class="timeline-company">个人项目 | <a href="https://tlsurl.com/vBird" target="_blank" style="color: var(--gold);">在线展示</a> | <a href="https://tlsurl.com/vBird_git" target="_blank" style="color: var(--gold);">GitHub</a></div>
-                        <p>基于R Shiny设计的响应式可视化探索平台，通过使用预计算的气温格点数据与鸟类观测数据降低实时资源计算负载。采用响应式设计增加使用流畅度，为生态研究提供数据支持。</p>
-                        <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技术栈：R Shiny, ggplot2, 数据可视化</p>
+                        <div class="timeline-title">鸟类观测数据可视化与交互探索（加拿大 2000–2023）</div>
+                        <div class="timeline-links">
+                            <a href="https://tlsurl.com/vBird" target="_blank" class="timeline-link">在线展示</a>
+                            <a href="https://tlsurl.com/vBird_git" target="_blank" class="timeline-link">GitHub仓库</a>
+                        </div>
+
+                        <div class="project-description">
+                            <p>构建交互式可视化平台，帮助非专业用户直观探索加拿大 2000–2023 年鸟类观测在空间、时间及气候因素下的分布规律。</p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">我的职责</h4>
+                            <p class="project-content">
+                                独立完成系统的设计、开发与部署
+                            </p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">技术细节</h4>
+                            <ul class="project-tech-list">
+                                <li><strong>数据处理：</strong>设计预处理流程，采用 Parquet 存储 + DuckDB 查询，高效聚合海量观测与气温格点数据。</li>
+                                <li><strong>交互可视化：</strong>基于 R Shiny + Leaflet 搭建动态地图与交互界面，结合 CSS 模板优化用户体验。</li>
+                                <li><strong>部署：</strong>通过 shinyapps.io 云端部署，实现实时在线访问。</li>
+                            </ul>
+                        </div>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-date">2023 - 至今</div>
-                        <div class="timeline-title">基于屏幕捕捉的自然语言聊天框</div>
-                        <div class="timeline-company">个人项目 | <a href="https://tlsurl.com/lotus" target="_blank" style="color: var(--gold);">GitHub</a></div>
-                        <p>使用Qt Designer搭建UI逻辑框架，利用Python中的MSS包进行屏幕捕捉，使用base64进行格式转换后利用OpenAI的API调用大模型进行语言生成。利用QThread实现异步设计，保证使用的流畅性。</p>
-                        <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技术栈：Python, Qt Designer, OpenAI API, 异步编程</p>
+                        <div class="timeline-title">基于大语言模型的屏幕交互式助手</div>
+                        <div class="timeline-links">
+                            <a href="https://tlsurl.com/lotus" target="_blank" class="timeline-link">GitHub仓库</a>
+                        </div>
+
+                        <div class="project-description">
+                            <p>开发多模态 LLM 悬浮式助手，实现对屏幕内容的实时解析与智能问答。</p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">我的职责</h4>
+                            <p class="project-content">
+                                独立完成系统的设计、开发与实现
+                            </p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">技术细节</h4>
+                            <ul class="project-tech-list">
+                                <li><strong>UI 框架：</strong>基于 Qt Designer 搭建悬浮式对话框，完成交互逻辑设计。</li>
+                                <li><strong>屏幕捕捉：</strong>使用 MSS 捕获屏幕内容，并转换为 Base64 格式以供模型处理。</li>
+                                <li><strong>多模态理解：</strong>调用 OpenAI API，实现自然语言与图像的联合解析和问答。</li>
+                                <li><strong>性能优化：</strong>利用 QThread 实现异步设计，确保界面响应与交互流畅性。</li>
+                            </ul>
+                        </div>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-date">2022.09-10 & 2023.01-02</div>
                         <div class="timeline-title">研究助理</div>
@@ -1328,7 +1683,7 @@
                         <p style="margin-top: 0.5rem; color: var(--gold); font-size: 0.9rem;">技能应用：Python, 数据分析, 统计建模</p>
                     </div>
                 </div>
-                
+
                 <h3 style="margin-top: 3rem; margin-bottom: 2rem; color: var(--dark-gray); font-size: 1.8rem;">其他亮点</h3>
                 <div style="background: var(--white); padding: 2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border-left: 4px solid var(--gold);">
                     <div style="margin-bottom: 1.5rem;">
@@ -1398,7 +1753,115 @@
                     }
                 });
             });
+
+            // 初始化技能卡片状态
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach((card, index) => {
+                if (index >= 3) {
+                    card.classList.add('hidden');
+                } else {
+                    card.classList.add('visible');
+                }
+            });
         });
+
+        // 优化的技能展开/收起功能
+        function toggleSkills(button) {
+            const container = document.querySelector('.skills-container');
+            const allCards = document.querySelectorAll('.skill-card');
+            const btnText = button.querySelector('.btn-text');
+
+            if (button.classList.contains('expanded')) {
+                // 收起
+                container.classList.remove('expanding');
+                container.classList.add('collapsing');
+
+                // 使用 requestAnimationFrame 批量更新DOM
+                requestAnimationFrame(() => {
+                    allCards.forEach((card, index) => {
+                        if (index >= 3) {
+                            card.classList.add('hidden');
+                            card.classList.remove('visible');
+                        }
+                    });
+                    button.classList.remove('expanded');
+                    btnText.textContent = '查看全部技能';
+                });
+
+                // 延迟后清理类名
+                setTimeout(() => {
+                    container.classList.remove('collapsing');
+                    document.getElementById('skills').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 400);
+            } else {
+                // 展开
+                container.classList.remove('collapsing');
+                container.classList.add('expanding');
+
+                // 批量更新DOM
+                requestAnimationFrame(() => {
+                    allCards.forEach((card, index) => {
+                        if (index >= 3) {
+                            card.classList.remove('hidden');
+                            card.classList.add('visible');
+                        }
+                    });
+                    button.classList.add('expanded');
+                    btnText.textContent = '收起技能';
+                });
+
+                // 清理类名
+                setTimeout(() => {
+                    container.classList.remove('expanding');
+                }, 700);
+            }
+        }
+
+        // 优化的课程展开/收起功能
+        function toggleCourses(button, cardId) {
+            const courseCard = document.getElementById(cardId);
+            const coursesList = courseCard.querySelector('.courses-list');
+            const allItems = courseCard.querySelectorAll('.course-item');
+            const expandText = button.querySelector('.expand-text');
+
+            if (button.classList.contains('expanded')) {
+                // 收起
+                coursesList.classList.remove('expanding');
+                coursesList.classList.add('collapsing');
+
+                requestAnimationFrame(() => {
+                    allItems.forEach((item, index) => {
+                        if (index >= 5) {
+                            item.classList.add('hidden');
+                        }
+                    });
+                    button.classList.remove('expanded');
+                    expandText.textContent = '查看全部';
+                });
+
+                setTimeout(() => {
+                    coursesList.classList.remove('collapsing');
+                }, 300);
+            } else {
+                // 展开
+                coursesList.classList.remove('collapsing');
+                coursesList.classList.add('expanding');
+
+                requestAnimationFrame(() => {
+                    allItems.forEach((item, index) => {
+                        if (index >= 5) {
+                            item.classList.remove('hidden');
+                        }
+                    });
+                    button.classList.add('expanded');
+                    expandText.textContent = '收起';
+                });
+
+                setTimeout(() => {
+                    coursesList.classList.remove('expanding');
+                }, 400);
+            }
+        }
     </script>
 </body>
 </html>
