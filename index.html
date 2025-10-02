@@ -30,6 +30,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* 为导航栏预留空间 */
         }
 
         body {
@@ -895,7 +896,7 @@
             /* Hero区域 */
             .hero-content {
                 grid-template-columns: 1fr;
-                text-align: center;
+                text-align: left;  /* 改为左对齐 */
                 gap: 2rem;
             }
 
@@ -916,9 +917,18 @@
                 width: 200px;
                 height: 200px;
                 font-size: 5rem;
+                margin: 0 auto;  /* 保持头像居中 */
             }
 
-            /* 关于部分 */
+            /* Hero文字内容左对齐 */
+            .hero-text {
+                text-align: left;
+            }
+
+            .contact-info-inline {
+                text-align: left;  /* 改为左对齐 */
+                margin-bottom: 1rem;
+            }
             .personal-info-bar {
                 flex-direction: row;
                 flex-wrap: wrap;
