@@ -153,6 +153,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            scroll-margin-top: 60px; /* 为固定导航栏预留空间 */
         }
 
         section:nth-child(even) {
@@ -944,6 +945,16 @@
                 grid-template-columns: 1fr;
                 text-align: left;  /* 改为左对齐 */
                 gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: left; /* 确保文本左对齐 */
+            }
+
+            .hero-text h1,
+            .hero-text h2,
+            .hero-text p {
+                text-align: left; /* 强制所有文本左对齐 */
             }
 
             .hero-text h1 {
