@@ -612,7 +612,6 @@
             .skills-container {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-                margin-bottom: 0; /* 完全去除底部间距 */
             }
 
             .skill-card {
@@ -629,7 +628,7 @@
 
             /* 移动端按钮紧贴卡片 */
             .skills-expand-btn {
-                margin-top: 0.8rem; /* 只保留很小的顶部间距 */
+                margin-top: 1rem;
                 padding: 0.6rem 1.5rem;
                 font-size: 0.9rem;
             }
@@ -1200,12 +1199,11 @@
 
             /* 技能部分移动端优化 */
             .skills-container {
-                gap: 1rem; /* 从1.5rem减少到1rem */
-                margin-bottom: 0; /* 完全去除底部间距 */
+                gap: 1rem;
             }
 
             .skills-expand-btn {
-                margin-top: 0.5rem; /* 按钮与卡片的间距 */
+                margin-top: 0.8rem; /* 按钮与卡片的间距 */
             }
 
             .skill-group {
@@ -1575,119 +1573,121 @@
         <div class="container">
             <div class="skills-wrapper">
                 <h2 class="section-title">专业技能</h2>
-                <div class="skills-container">
-                    <!-- 熟练技能 -->
-                    <div class="skill-card" data-level="proficient">
-                        <div class="skill-category">编程语言</div>
-                        <h3 class="skill-title">Python</h3>
-                        <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
-                        <span class="skill-level-badge level-proficient">熟练</span>
-                    </div>
+                <div class="skills-content">
+                    <div class="skills-container">
+                        <!-- 熟练技能 -->
+                        <div class="skill-card" data-level="proficient">
+                            <div class="skill-category">编程语言</div>
+                            <h3 class="skill-title">Python</h3>
+                            <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
 
-                    <div class="skill-card" data-level="proficient">
-                        <div class="skill-category">编程语言</div>
-                        <h3 class="skill-title">R语言</h3>
-                        <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
-                        <span class="skill-level-badge level-proficient">熟练</span>
-                    </div>
+                        <div class="skill-card" data-level="proficient">
+                            <div class="skill-category">编程语言</div>
+                            <h3 class="skill-title">R语言</h3>
+                            <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
 
-                    <div class="skill-card" data-level="proficient">
-                        <div class="skill-category">数据处理</div>
-                        <h3 class="skill-title">数据清洗</h3>
-                        <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
-                        <span class="skill-level-badge level-proficient">熟练</span>
-                    </div>
+                        <div class="skill-card" data-level="proficient">
+                            <div class="skill-category">数据处理</div>
+                            <h3 class="skill-title">数据清洗</h3>
+                            <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
 
-                    <!-- 初始隐藏的熟练技能 -->
-                    <div class="skill-card hidden" data-level="proficient">
-                        <div class="skill-category">数据处理</div>
-                        <h3 class="skill-title">数据可视化</h3>
-                        <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
-                        <span class="skill-level-badge level-proficient">熟练</span>
-                    </div>
+                        <!-- 初始隐藏的熟练技能 -->
+                        <div class="skill-card hidden" data-level="proficient">
+                            <div class="skill-category">数据处理</div>
+                            <h3 class="skill-title">数据可视化</h3>
+                            <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
 
-                    <!-- 掌握技能 -->
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">大数据</div>
-                        <h3 class="skill-title">PySpark</h3>
-                        <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <!-- 掌握技能 -->
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">大数据</div>
+                            <h3 class="skill-title">PySpark</h3>
+                            <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">分布式机器学习</div>
-                        <h3 class="skill-title">分布式模型开发</h3>
-                        <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">分布式机器学习</div>
+                            <h3 class="skill-title">分布式模型开发</h3>
+                            <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">数据库</div>
-                        <h3 class="skill-title">SQL</h3>
-                        <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">数据库</div>
+                            <h3 class="skill-title">SQL</h3>
+                            <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">机器学习</div>
-                        <h3 class="skill-title">深度学习</h3>
-                        <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">机器学习</div>
+                            <h3 class="skill-title">深度学习</h3>
+                            <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">机器学习</div>
-                        <h3 class="skill-title">传统机器学习</h3>
-                        <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">机器学习</div>
+                            <h3 class="skill-title">传统机器学习</h3>
+                            <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">统计分析</div>
-                        <h3 class="skill-title">统计建模</h3>
-                        <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">统计分析</div>
+                            <h3 class="skill-title">统计建模</h3>
+                            <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="competent">
-                        <div class="skill-category">Web开发</div>
-                        <h3 class="skill-title">R Shiny</h3>
-                        <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
-                        <span class="skill-level-badge level-competent">掌握</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="competent">
+                            <div class="skill-category">Web开发</div>
+                            <h3 class="skill-title">R Shiny</h3>
+                            <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
 
-                    <!-- 了解技能 -->
-                    <div class="skill-card hidden" data-level="familiar">
-                        <div class="skill-category">编程语言</div>
-                        <h3 class="skill-title">C语言</h3>
-                        <p class="skill-description">系统编程基础，数据结构实现</p>
-                        <span class="skill-level-badge level-familiar">了解</span>
-                    </div>
+                        <!-- 了解技能 -->
+                        <div class="skill-card hidden" data-level="familiar">
+                            <div class="skill-category">编程语言</div>
+                            <h3 class="skill-title">C语言</h3>
+                            <p class="skill-description">系统编程基础，数据结构实现</p>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="familiar">
-                        <div class="skill-category">编程语言</div>
-                        <h3 class="skill-title">Java</h3>
-                        <p class="skill-description">面向对象编程，基础应用开发</p>
-                        <span class="skill-level-badge level-familiar">了解</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="familiar">
+                            <div class="skill-category">编程语言</div>
+                            <h3 class="skill-title">Java</h3>
+                            <p class="skill-description">面向对象编程，基础应用开发</p>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="familiar">
-                        <div class="skill-category">GUI开发</div>
-                        <h3 class="skill-title">Qt Designer</h3>
-                        <p class="skill-description">桌面应用界面设计与开发</p>
-                        <span class="skill-level-badge level-familiar">了解</span>
-                    </div>
+                        <div class="skill-card hidden" data-level="familiar">
+                            <div class="skill-category">GUI开发</div>
+                            <h3 class="skill-title">Qt Designer</h3>
+                            <p class="skill-description">桌面应用界面设计与开发</p>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
 
-                    <div class="skill-card hidden" data-level="familiar">
-                        <div class="skill-category">API集成</div>
-                        <h3 class="skill-title">OpenAI API</h3>
-                        <p class="skill-description">大语言模型API调用，异步编程实践</p>
-                        <span class="skill-level-badge level-familiar">了解</span>
+                        <div class="skill-card hidden" data-level="familiar">
+                            <div class="skill-category">API集成</div>
+                            <h3 class="skill-title">OpenAI API</h3>
+                            <p class="skill-description">大语言模型API调用，异步编程实践</p>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
                     </div>
+                    <button class="skills-expand-btn" onclick="toggleSkills(this)">
+                        <span class="btn-text">查看全部技能</span>
+                    </button>
                 </div>
-                <button class="skills-expand-btn" onclick="toggleSkills(this)">
-                    <span class="btn-text">查看全部技能</span>
-                </button>
             </div>
         </div>
     </section>
