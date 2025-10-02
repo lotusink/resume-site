@@ -606,6 +606,10 @@
             .skills-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .skills-expand-btn {
+                grid-column: 1 / -1; /* 保持跨越所有列 */
+            }
         }
 
         @media (max-width: 576px) {
@@ -626,9 +630,9 @@
                 font-size: 0.85rem;
             }
 
-            /* 移动端按钮紧贴卡片 */
+            /* 移动端按钮保持跨越整个宽度 */
             .skills-expand-btn {
-                margin-top: 1rem;
+                grid-column: 1; /* 单列时只占一列 */
                 padding: 0.6rem 1.5rem;
                 font-size: 0.9rem;
             }
@@ -1203,7 +1207,8 @@
             }
 
             .skills-expand-btn {
-                margin-top: 0.8rem; /* 按钮与卡片的间距 */
+                padding: 0.65rem 1.6rem;
+                font-size: 0.95rem;
             }
 
             .skill-group {
