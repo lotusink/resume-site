@@ -573,103 +573,87 @@
             font-size: 1.2em;
         }
 
-        /* 技能部分 - 优化后的紧凑设计 */
+        /* 技能模块 - 新的横向卡片设计 */
         .skills-wrapper {
             width: 100%;
             max-width: 100%;
         }
 
         .skills-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 1.5rem;
             width: 100%;
-            max-width: 100%;
         }
 
-        .skill-card {
+        .skill-module {
             background: var(--white);
-            padding: 1.25rem;
+            padding: 1.75rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            border-top: 3px solid var(--gold);
+            border-left: 4px solid var(--gold);
             position: relative;
             overflow: hidden;
         }
 
-        .skill-card::before {
+        .skill-module::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.03) 100%);
+            background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.02) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .skill-card:hover::before {
+        .skill-module:hover::before {
             opacity: 1;
         }
 
-        .skill-card:hover {
-            transform: translateY(-5px);
+        .skill-module:hover {
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .skill-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
+        .skill-module-header {
+            margin-bottom: 1rem;
         }
 
-        .skill-title {
-            font-size: 1.1rem;
+        .skill-module-title {
+            font-size: 1.25rem;
             font-weight: 600;
             color: var(--dark-gray);
         }
 
-        .skill-level-badge {
+        .skill-module-description {
+            font-size: 0.95rem;
+            color: var(--mid-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .skill-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-keyword {
             display: inline-block;
-            padding: 0.2rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* 熟练度等级样式 - 三级体系 */
-        .level-proficient {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            padding: 0.3rem 0.75rem;
+            background: rgba(212, 175, 55, 0.1);
             color: var(--gold);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .level-competent {
-            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(74, 144, 226, 0.05) 100%);
-            color: #4A90E2;
-            border: 1px solid rgba(74, 144, 226, 0.25);
-        }
-
-        .level-familiar {
-            background: linear-gradient(135deg, rgba(108, 117, 125, 0.1) 0%, rgba(108, 117, 125, 0.05) 100%);
-            color: #6c757d;
-            border: 1px solid rgba(108, 117, 125, 0.2);
-        }
-
-        .skill-category {
-            font-size: 0.8rem;
-            color: var(--mid-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-description {
             font-size: 0.85rem;
-            color: var(--mid-gray);
-            line-height: 1.5;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-keyword:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            transform: translateY(-1px);
         }
 
         /* 经验部分 */
@@ -1187,26 +1171,27 @@
                 gap: 1rem;
             }
 
-            .skill-card {
+            .skill-module {
                 padding: 1rem;
+                border-left-width: 3px;
             }
 
-            .skill-header {
-                flex-direction: row;
-                gap: 0.5rem;
-            }
-
-            .skill-title {
+            .skill-module-title {
                 font-size: 1rem;
             }
 
-            .skill-level-badge {
-                font-size: 0.7rem;
-                padding: 0.15rem 0.4rem;
+            .skill-module-description {
+                font-size: 0.85rem;
+                line-height: 1.5;
             }
 
-            .skill-description {
-                font-size: 0.8rem;
+            .skill-keywords {
+                gap: 0.4rem;
+            }
+
+            .skill-keyword {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.5rem;
             }
 
             /* 时间线移动端优化 */
@@ -1403,7 +1388,7 @@
             }
 
             /* 移除hover效果，改为tap效果 */
-            .skill-card:active {
+            .skill-module:active {
                 transform: scale(0.98);
             }
 
@@ -1446,7 +1431,7 @@
                     <h1>陈鹏羽</h1>
                     <h2>数据科学研究生</h2>
                     <p>
-                        莫纳什大学数据科学硕士在读（QS 2026 第36位，预计 2026 年 7 月毕业）。扎实的统计学与数据分析背景，熟练掌握 R 与 Python，擅长大数据处理、机器学习和可视化，具备 LLM 应用与智能体开发经验，专注于以数据智能驱动决策与创新。
+                        莫纳什大学数据科学硕士在读（QS 2026 第36位，预计 2026 年 7 月毕业）。具有扎实的统计学与数据分析背景，熟练掌握 R 与 Python 等编程语言，擅长数据的清洗、探索、建模与可视化，有基于自然语言模型与 Diffusion 音频模型的实践经历，专注于以数据智能驱动决策与创新。
                     </p>
                     <div class="contact-info-inline">
                         <div style="color: var(--light-gold); font-size: 0.95rem; line-height: 1.8;">
@@ -1585,133 +1570,74 @@
             <div class="skills-wrapper">
                 <h2 class="section-title">专业技能</h2>
                 <div class="skills-container">
-                    <!-- 熟练技能 -->
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">R</h3>
-                            <span class="skill-level-badge level-proficient">熟练</span>
+                    <!-- 数据清洗/预处理 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">数据清洗 / 预处理</h3>
                         </div>
-                        <div class="skill-category">编程语言</div>
-                        <p class="skill-description">Data.table, Dplyr, Tidyverse等统计分析包的深入应用</p>
+                        <p class="skill-module-description">利用 Python 和 R 库对原始数据进行清洗、格式化、异常检测与转换</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword">pandas</span>
+                            <span class="skill-keyword">NumPy</span>
+                            <span class="skill-keyword">data.table</span>
+                            <span class="skill-keyword">dplyr</span>
+                            <span class="skill-keyword">PySpark</span>
+                        </div>
                     </div>
 
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">Python</h3>
-                            <span class="skill-level-badge level-proficient">熟练</span>
+                    <!-- 数据存储/架构设计 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">数据存储 / 架构设计</h3>
                         </div>
-                        <div class="skill-category">编程语言</div>
-                        <p class="skill-description">NumPy, Pandas, Matplotlib等科学计算和数据分析库的熟练运用</p>
+                        <p class="skill-module-description">设计与实现关系型数据库结构，并在分布式环境中存储中间与结果数据</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword">SQL / PL/SQL</span>
+                            <span class="skill-keyword">数据模型</span>
+                            <span class="skill-keyword">索引设计</span>
+                            <span class="skill-keyword">PySpark 存储方案</span>
+                        </div>
                     </div>
 
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">数据清洗</h3>
-                            <span class="skill-level-badge level-proficient">熟练</span>
+                    <!-- 数据分析/建模 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">数据分析 / 建模</h3>
                         </div>
-                        <div class="skill-category">数据处理</div>
-                        <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
+                        <p class="skill-module-description">使用机器学习 / 深度学习方法探索数据模式，进行预测与解释</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword">scikit-learn</span>
+                            <span class="skill-keyword">PyTorch</span>
+                            <span class="skill-keyword">R 建模</span>
+                            <span class="skill-keyword">Spark MLlib</span>
+                        </div>
                     </div>
 
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">数据可视化</h3>
-                            <span class="skill-level-badge level-proficient">熟练</span>
+                    <!-- 数据可视化/交互展示 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">数据可视化 / 交互展示</h3>
                         </div>
-                        <div class="skill-category">数据处理</div>
-                        <p class="skill-description">Matplotlib, Ggplot2, Tableau创建专业的数据可视化图表</p>
+                        <p class="skill-module-description">将分析 / 模型成果可视化，并通过交互界面使用户探索数据</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword">matplotlib</span>
+                            <span class="skill-keyword">seaborn</span>
+                            <span class="skill-keyword">ggplot2</span>
+                            <span class="skill-keyword">R Shiny</span>
+                        </div>
                     </div>
 
-                    <!-- 掌握技能 -->
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">分布式数据建模</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
+                    <!-- 辅助/工具支持能力 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">辅助 / 工具支持能力</h3>
                         </div>
-                        <div class="skill-category">大数据</div>
-                        <p class="skill-description">PySpark处理框架，分布式环境下的模型参数调优与MLlib机器学习库应用</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">SQL</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
+                        <p class="skill-module-description">涵盖界面设计、异步任务、生成式模型调用等跨模块支持能力</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword">Qt Designer</span>
+                            <span class="skill-keyword">QThread</span>
+                            <span class="skill-keyword">OpenAI API / transformers</span>
                         </div>
-                        <div class="skill-category">数据库</div>
-                        <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">深度学习</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-                        <div class="skill-category">机器学习</div>
-                        <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">传统机器学习</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-                        <div class="skill-category">机器学习</div>
-                        <p class="skill-description">Scikit-learn库，随机森林、梯度提升树等经典算法的应用</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">统计建模</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-                        <div class="skill-category">统计分析</div>
-                        <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">R Shiny</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-                        <div class="skill-category">Web开发</div>
-                        <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
-                    </div>
-
-                    <!-- 了解技能 -->
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">C语言</h3>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-                        <div class="skill-category">编程语言</div>
-                        <p class="skill-description">系统编程基础，数据结构实现</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">Java</h3>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-                        <div class="skill-category">编程语言</div>
-                        <p class="skill-description">面向对象编程，基础应用开发</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">Qt Designer</h3>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-                        <div class="skill-category">GUI开发</div>
-                        <p class="skill-description">桌面应用界面设计与开发</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">OpenAI API</h3>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-                        <div class="skill-category">API集成</div>
-                        <p class="skill-description">大语言模型API调用，异步编程实践</p>
                     </div>
                 </div>
             </div>
