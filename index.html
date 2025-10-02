@@ -22,8 +22,8 @@
             --light-gold: #F4E4BC;
             --dark-gray: #1a1a1a;
             --mid-gray: #4a4a4a;
-            --light-gray: #f5f5f5;
-            --white: #ffffff;
+            --light-gray: #f0f0f0;
+            --white: #f8f8f8;
             --nav-height: 60px;
             --nav-height-mobile: 50px;
         }
@@ -36,7 +36,7 @@
             font-family: 'Arial', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
             color: var(--dark-gray);
-            background: var(--white);
+            background: #f4f4f4;
             position: relative;
         }
 
@@ -48,17 +48,6 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.02) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Canvas 粒子效果 */
-        #particleCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             pointer-events: none;
             z-index: 1;
         }
@@ -299,7 +288,7 @@
         }
 
         .modal-content {
-            background-color: var(--white);
+            background-color: #f7f7f7;
             padding: 2.5rem;
             border-radius: 0;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
@@ -425,7 +414,7 @@
 
         /* 个人信息栏 */
         .personal-info-bar {
-            background: var(--white);
+            background: #f6f6f6;
             padding: 1.5rem 2rem;
             margin-bottom: 2rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
@@ -470,7 +459,7 @@
         }
 
         .education-card {
-            background: var(--white);
+            background: #f7f7f7;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
@@ -582,7 +571,7 @@
         }
 
         .skill-module {
-            background: var(--white);
+            background: #f6f6f6;
             padding: 1.75rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
@@ -708,7 +697,7 @@
         .timeline-item {
             position: relative;
             margin-bottom: 3rem;
-            background: var(--white);
+            background: #f7f7f7;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
@@ -730,7 +719,7 @@
             height: 16px;
             background: var(--gold);
             border-radius: 50%;
-            border: 3px solid var(--white);
+            border: 3px solid #f7f7f7;
         }
 
         .timeline-date {
@@ -842,7 +831,7 @@
 
         /* 其他亮点卡片 */
         .highlight-card {
-            background: var(--white);
+            background: #f6f6f6;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             border-left: 4px solid var(--gold);
@@ -1426,9 +1415,6 @@
 
     <!-- 首页 -->
     <section id="home">
-        <!-- Canvas 粒子效果 -->
-        <canvas id="particleCanvas"></canvas>
-
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -1772,215 +1758,8 @@
     </section>
 
     <script>
-        // 粒子动画系统
-        class ParticleSystem {
-            constructor(canvas) {
-                this.canvas = canvas;
-                this.ctx = canvas.getContext('2d');
-                this.particles = [];
-                this.smokeClouds = [];
-                this.mouseX = 0;
-                this.mouseY = 0;
-
-                this.resize();
-                this.init();
-
-                // 监听鼠标移动
-                window.addEventListener('mousemove', (e) => {
-                    this.mouseX = e.clientX;
-                    this.mouseY = e.clientY;
-                });
-
-                window.addEventListener('resize', () => this.resize());
-            }
-
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-
-            init() {
-                // 创建粒子
-                const particleCount = window.innerWidth < 768 ? 30 : 60;
-                for (let i = 0; i < particleCount; i++) {
-                    this.particles.push(this.createParticle());
-                }
-
-                // 创建烟雾云
-                const smokeCount = window.innerWidth < 768 ? 3 : 5;
-                for (let i = 0; i < smokeCount; i++) {
-                    this.smokeClouds.push(this.createSmokeCloud());
-                }
-            }
-
-            createParticle() {
-                return {
-                    x: Math.random() * this.canvas.width,
-                    y: Math.random() * this.canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: -Math.random() * 0.5 - 0.2,
-                    size: Math.random() * 2 + 0.5,
-                    opacity: Math.random() * 0.5 + 0.3,
-                    life: 1,
-                    maxLife: Math.random() * 100 + 100,
-                    currentLife: 0,
-                    glowing: Math.random() > 0.7,
-                    color: Math.random() > 0.8 ? '#F4E4BC' : '#D4AF37'
-                };
-            }
-
-            createSmokeCloud() {
-                return {
-                    x: Math.random() * this.canvas.width,
-                    y: this.canvas.height + 100,
-                    vx: (Math.random() - 0.5) * 0.3,
-                    vy: -Math.random() * 0.3 - 0.1,
-                    radius: Math.random() * 100 + 50,
-                    opacity: Math.random() * 0.05 + 0.02,
-                    rotation: Math.random() * Math.PI * 2,
-                    rotationSpeed: (Math.random() - 0.5) * 0.002
-                };
-            }
-
-            updateParticle(particle) {
-                // 更新位置
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-
-                // 鼠标交互 - 粒子被鼠标吸引
-                const dx = this.mouseX - particle.x;
-                const dy = this.mouseY - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 150) {
-                    const force = (150 - distance) / 150 * 0.02;
-                    particle.vx += dx * force;
-                    particle.vy += dy * force;
-                }
-
-                // 添加微小的随机运动
-                particle.vx += (Math.random() - 0.5) * 0.01;
-                particle.vy += (Math.random() - 0.5) * 0.01;
-
-                // 速度阻尼
-                particle.vx *= 0.98;
-                particle.vy *= 0.98;
-
-                // 生命周期
-                particle.currentLife++;
-                particle.life = 1 - (particle.currentLife / particle.maxLife);
-
-                // 边界处理和重生
-                if (particle.x < -10 || particle.x > this.canvas.width + 10 ||
-                    particle.y < -10 || particle.y > this.canvas.height + 10 ||
-                    particle.life <= 0) {
-                    Object.assign(particle, this.createParticle());
-                    particle.y = this.canvas.height + 10;
-                }
-            }
-
-            updateSmokeCloud(cloud) {
-                cloud.x += cloud.vx;
-                cloud.y += cloud.vy;
-                cloud.rotation += cloud.rotationSpeed;
-
-                // 缓慢扩散
-                cloud.radius += 0.1;
-                cloud.opacity *= 0.998;
-
-                // 重置烟雾
-                if (cloud.y < -200 || cloud.opacity < 0.001) {
-                    Object.assign(cloud, this.createSmokeCloud());
-                }
-            }
-
-            drawParticle(particle) {
-                this.ctx.save();
-
-                // 设置透明度
-                this.ctx.globalAlpha = particle.opacity * particle.life;
-
-                // 发光效果
-                if (particle.glowing) {
-                    const gradient = this.ctx.createRadialGradient(
-                        particle.x, particle.y, 0,
-                        particle.x, particle.y, particle.size * 4
-                    );
-                    gradient.addColorStop(0, particle.color);
-                    gradient.addColorStop(0.4, particle.color + '80');
-                    gradient.addColorStop(1, 'transparent');
-
-                    this.ctx.fillStyle = gradient;
-                    this.ctx.fillRect(
-                        particle.x - particle.size * 4,
-                        particle.y - particle.size * 4,
-                        particle.size * 8,
-                        particle.size * 8
-                    );
-                }
-
-                // 绘制核心粒子
-                this.ctx.fillStyle = particle.color;
-                this.ctx.beginPath();
-                this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                this.ctx.fill();
-
-                this.ctx.restore();
-            }
-
-            drawSmokeCloud(cloud) {
-                this.ctx.save();
-
-                this.ctx.globalAlpha = cloud.opacity;
-                this.ctx.translate(cloud.x, cloud.y);
-                this.ctx.rotate(cloud.rotation);
-
-                // 创建烟雾渐变
-                const gradient = this.ctx.createRadialGradient(
-                    0, 0, 0,
-                    0, 0, cloud.radius
-                );
-                gradient.addColorStop(0, '#D4AF3720');
-                gradient.addColorStop(0.5, '#D4AF3710');
-                gradient.addColorStop(1, 'transparent');
-
-                this.ctx.fillStyle = gradient;
-                this.ctx.beginPath();
-                this.ctx.arc(0, 0, cloud.radius, 0, Math.PI * 2);
-                this.ctx.fill();
-
-                this.ctx.restore();
-            }
-
-            animate() {
-                // 清除画布
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-                // 更新和绘制烟雾
-                this.smokeClouds.forEach(cloud => {
-                    this.updateSmokeCloud(cloud);
-                    this.drawSmokeCloud(cloud);
-                });
-
-                // 更新和绘制粒子
-                this.particles.forEach(particle => {
-                    this.updateParticle(particle);
-                    this.drawParticle(particle);
-                });
-
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-
-        // 初始化粒子系统
+        // 初始化导航和其他功能
         document.addEventListener('DOMContentLoaded', function() {
-            const canvas = document.getElementById('particleCanvas');
-            if (canvas) {
-                const particleSystem = new ParticleSystem(canvas);
-                particleSystem.animate();
-            }
-
-            // 原有的导航和其他功能代码...
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
 
