@@ -24,6 +24,8 @@
             --mid-gray: #4a4a4a;
             --light-gray: #f5f5f5;
             --white: #ffffff;
+            --nav-height: 60px; /* 默认导航栏高度 */
+            --nav-height-mobile: 50px; /* 移动端导航栏高度 */
         }
 
         html {
@@ -56,12 +58,13 @@
             top: 0;
             width: 100%;
             background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
-            background-image: 
+            background-image:
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
                 linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
             padding: 1rem 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            height: var(--nav-height);
         }
 
         nav::after {
@@ -138,19 +141,20 @@
             background: var(--light-gray);
         }
 
-        /* 首页 Hero 部分 */
+        /* 首页 Hero 部分 - 修改1: 使用calc()计算高度 */
         #home {
-            background: 
+            background:
                 radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
                 radial-gradient(ellipse at bottom left, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
                 linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #1a1a1a 100%);
-            background-image: 
+            background-image:
                 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"),
                 radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
                 radial-gradient(ellipse at bottom left, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
                 linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #1a1a1a 100%);
             color: var(--white);
-            margin-top: 60px;
+            padding-top: var(--nav-height);
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
         }
@@ -361,7 +365,7 @@
             margin-bottom: 0.75rem;
         }
 
-        /* 课程列表优化 */
+        /* 课程列表优化 - 修改2: 增加padding-left */
         .courses-list {
             list-style: none;
             padding: 0;
@@ -370,7 +374,7 @@
 
         .course-item {
             padding: 0.4rem 0;
-            padding-left: 1.5rem;
+            padding-left: 2rem; /* 从1.5rem增加到2rem */
             position: relative;
             font-size: 0.9rem;
             color: var(--mid-gray);
@@ -383,7 +387,7 @@
         .course-item::before {
             content: '•';
             position: absolute;
-            left: 0.5rem;
+            left: 0.75rem; /* 从0.5rem增加到0.75rem */
             color: var(--gold);
         }
 
@@ -918,6 +922,12 @@
             /* 导航优化 */
             nav {
                 padding: 0.75rem 0;
+                height: var(--nav-height-mobile);
+            }
+
+            /* 首页适配移动端导航高度 */
+            #home {
+                padding-top: var(--nav-height-mobile);
             }
 
             .nav-container {
@@ -965,6 +975,15 @@
                 grid-template-columns: 1fr;
             }
 
+            /* 移动端课程列表增加更多padding */
+            .course-item {
+                padding-left: 2.5rem;
+            }
+
+            .course-item::before {
+                left: 1rem;
+            }
+
             /* 时间线 */
             .timeline {
                 padding-left: 20px;
@@ -997,6 +1016,32 @@
             nav {
                 padding: 0.6rem 0;
                 background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+                height: auto; /* 让导航栏自适应高度 */
+            }
+
+            /* 修复移动端首页高度 */
+            #home {
+                min-height: 100vh;
+                padding-top: 0;
+                margin-top: 0;
+                padding-bottom: 3rem;
+                display: flex;
+                align-items: center;
+            }
+
+            /* 为移动端添加一个占位元素 */
+            #home::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px; /* 移动端导航栏高度 */
+                background: transparent;
+            }
+
+            #home .container {
+                padding-top: calc(50px + 2rem); /* 导航栏高度 + 额外间距 */
             }
 
             .nav-menu {
@@ -1022,11 +1067,6 @@
             }
 
             /* Hero移动端优化 */
-            #home {
-                margin-top: 50px;
-                padding: 3rem 0;
-            }
-
             .hero-text h1 {
                 font-size: 2rem;
                 margin-bottom: 0.75rem;
@@ -1099,8 +1139,16 @@
                 font-size: 1.1rem;
             }
 
+            /* 移动端小屏幕课程列表进一步优化 */
             .course-item {
                 font-size: 0.85rem;
+                padding-left: 2.5rem; /* 保持足够的空间 */
+                line-height: 1.5;
+            }
+
+            .course-item::before {
+                left: 1rem; /* 确保黄点和文字有足够间距 */
+                font-size: 1.2rem; /* 稍微增大黄点 */
             }
 
             /* 项目部分移动端 */
@@ -1345,6 +1393,16 @@
 
             .timeline-item {
                 padding: 1rem;
+            }
+
+            /* 超小屏幕下课程列表 */
+            .course-item {
+                font-size: 0.8rem;
+                padding-left: 2.2rem;
+            }
+
+            .course-item::before {
+                left: 0.8rem;
             }
         }
 
