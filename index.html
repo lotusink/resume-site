@@ -612,7 +612,7 @@
             .skills-container {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-                margin-bottom: 1rem; /* 移动端减少底部间距 */
+                margin-bottom: 0; /* 完全去除底部间距 */
             }
 
             .skill-card {
@@ -627,9 +627,11 @@
                 font-size: 0.85rem;
             }
 
-            /* 移动端按钮更靠近卡片 */
+            /* 移动端按钮紧贴卡片 */
             .skills-expand-btn {
-                margin-top: 0.5rem;
+                margin-top: 0.8rem; /* 只保留很小的顶部间距 */
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -1198,8 +1200,12 @@
 
             /* 技能部分移动端优化 */
             .skills-container {
-                gap: 1.5rem;
-                margin-bottom: 1rem; /* 减少按钮间距 */
+                gap: 1rem; /* 从1.5rem减少到1rem */
+                margin-bottom: 0; /* 完全去除底部间距 */
+            }
+
+            .skills-expand-btn {
+                margin-top: 0.5rem; /* 按钮与卡片的间距 */
             }
 
             .skill-group {
