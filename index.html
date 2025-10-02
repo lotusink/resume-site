@@ -200,31 +200,10 @@
             opacity: 0.9;
         }
 
-        /* 联系方式按钮组 */
-        .contact-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-btn {
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-btn:hover {
-            background: var(--gold);
-            color: var(--dark-gray);
-            transform: translateY(-2px);
+        /* 联系方式文本 */
+        .contact-info-inline {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .cta-button {
@@ -267,7 +246,7 @@
         .modal-content {
             background-color: var(--white);
             padding: 2.5rem;
-            border-radius: 8px;
+            border-radius: 0; /* 去掉圆角 */
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             max-width: 500px;
             width: 90%;
@@ -308,7 +287,7 @@
         .contact-option {
             padding: 1rem;
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 4px;
+            border-radius: 0; /* 去掉圆角 */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -342,7 +321,7 @@
             background: var(--gold);
             color: var(--dark-gray);
             border: none;
-            border-radius: 4px;
+            border-radius: 0; /* 去掉圆角 */
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -443,6 +422,12 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .personal-info-bar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
         .info-item-inline {
@@ -606,13 +591,7 @@
             font-weight: 500;
         }
 
-        /* 新的熟练度等级样式 */
-        .level-master {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
-            color: #B8860B;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-        }
-
+        /* 熟练度等级样式 - 三级体系 */
         .level-proficient {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             color: var(--gold);
@@ -797,7 +776,19 @@
             margin-bottom: 1rem;
         }
 
-        /* 联系部分 */
+        /* 其他亮点卡片 */
+        .highlight-card {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
         #contact {
             background:
                 linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%),
@@ -1034,14 +1025,14 @@
                 margin-bottom: 1.5rem;
             }
 
-            .contact-buttons {
-                flex-direction: column;
-                width: 100%;
+            .contact-info-inline {
+                text-align: center;
+                margin-bottom: 1rem;
             }
 
-            .contact-btn {
-                width: 100%;
-                justify-content: center;
+            .contact-info-inline div {
+                font-size: 0.85rem !important;
+                line-height: 1.6;
             }
 
             .cta-button {
@@ -1223,12 +1214,12 @@
             }
 
             /* 其他亮点移动端 */
-            h3 {
-                font-size: 1.5rem !important;
+            .highlight-card {
+                padding: 1.5rem !important;
             }
 
-            div[style*="border-left: 4px solid"] {
-                padding: 1.5rem !important;
+            h3 {
+                font-size: 1.5rem !important;
             }
 
             h4 {
@@ -1339,6 +1330,18 @@
             .timeline-item:active {
                 transform: scale(0.98);
             }
+
+            .personal-info-bar:active {
+                transform: scale(0.98);
+            }
+
+            .highlight-card:active {
+                transform: scale(0.98);
+            }
+
+            .education-card:active {
+                transform: scale(0.98);
+            }
         }
     </style>
 </head>
@@ -1351,7 +1354,6 @@
                 <li><a href="#about" class="nav-link">关于</a></li>
                 <li><a href="#skills" class="nav-link">技能</a></li>
                 <li><a href="#experience" class="nav-link">项目</a></li>
-                <li><a href="#contact" class="nav-link">联系</a></li>
             </ul>
         </div>
     </nav>
@@ -1364,20 +1366,16 @@
                     <h1>陈鹏羽</h1>
                     <h2>数据科学研究生</h2>
                     <p>
-                        莫纳什大学数据科学硕士在读（QS 2026 第36位，预计 2026 年 7 月毕业）。扎实的统计学与数据分析背景，擅长大数据处理、机器学习和可视化，具备 LLM 应用与智能体开发经验，专注于以数据智能驱动决策与创新。
+                        莫纳什大学数据科学硕士在读（QS 2026 第36位，预计 2026 年 7 月毕业）。扎实的统计学与数据分析背景，熟练掌握 R 与 Python，擅长大数据处理、机器学习和可视化，具备 LLM 应用与智能体开发经验，专注于以数据智能驱动决策与创新。
                     </p>
-                    <div class="contact-buttons">
-                        <button class="contact-btn" onclick="showContactModal()">
-                            📧 邮件
-                        </button>
-                        <button class="contact-btn" onclick="showContactModal()">
-                            💬 微信
-                        </button>
-                        <button class="contact-btn" onclick="showContactModal()">
-                            📱 电话
-                        </button>
+                    <div class="contact-info-inline">
+                        <div style="color: var(--light-gold); font-size: 0.95rem; line-height: 1.8;">
+                            <div>邮箱: your.email@example.com</div>
+                            <div>微信: YourWeChatID</div>
+                            <div>电话: +86 138 0000 0000</div>
+                        </div>
                     </div>
-                    <button class="cta-button" onclick="showContactModal()">联系我</button>
+                    <button class="cta-button" onclick="showContactModal()" style="margin-top: 1.5rem;">联系我</button>
                 </div>
                 <div class="hero-image">
                     <div class="profile-box">羽</div>
@@ -1507,24 +1505,23 @@
             <div class="skills-wrapper">
                 <h2 class="section-title">专业技能</h2>
                 <div class="skills-container">
-                    <!-- 精通技能 -->
+                    <!-- 熟练技能 -->
                     <div class="skill-card">
                         <div class="skill-header">
-                            <h3 class="skill-title">R语言</h3>
-                            <span class="skill-level-badge level-master">精通</span>
+                            <h3 class="skill-title">R</h3>
+                            <span class="skill-level-badge level-proficient">熟练</span>
                         </div>
                         <div class="skill-category">编程语言</div>
-                        <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
+                        <p class="skill-description">Data.table, Dplyr, Tidyverse等统计分析工具的深入应用</p>
                     </div>
 
-                    <!-- 熟练技能 -->
                     <div class="skill-card">
                         <div class="skill-header">
                             <h3 class="skill-title">Python</h3>
                             <span class="skill-level-badge level-proficient">熟练</span>
                         </div>
                         <div class="skill-category">编程语言</div>
-                        <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
+                        <p class="skill-description">NumPy, Pandas, Matplotlib等科学计算和数据分析库的熟练运用</p>
                     </div>
 
                     <div class="skill-card">
@@ -1542,26 +1539,17 @@
                             <span class="skill-level-badge level-proficient">熟练</span>
                         </div>
                         <div class="skill-category">数据处理</div>
-                        <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
+                        <p class="skill-description">Matplotlib, Ggplot2, Tableau创建专业的数据可视化图表</p>
                     </div>
 
                     <!-- 掌握技能 -->
                     <div class="skill-card">
                         <div class="skill-header">
-                            <h3 class="skill-title">PySpark</h3>
+                            <h3 class="skill-title">分布式数据建模</h3>
                             <span class="skill-level-badge level-competent">掌握</span>
                         </div>
                         <div class="skill-category">大数据</div>
-                        <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
-                    </div>
-
-                    <div class="skill-card">
-                        <div class="skill-header">
-                            <h3 class="skill-title">分布式模型开发</h3>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-                        <div class="skill-category">分布式机器学习</div>
-                        <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
+                        <p class="skill-description">PySpark处理框架，分布式环境下的模型参数调优与MLlib机器学习库应用</p>
                     </div>
 
                     <div class="skill-card">
@@ -1588,7 +1576,7 @@
                             <span class="skill-level-badge level-competent">掌握</span>
                         </div>
                         <div class="skill-category">机器学习</div>
-                        <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
+                        <p class="skill-description">Scikit-learn库，随机森林、梯度提升树等经典算法的应用</p>
                     </div>
 
                     <div class="skill-card">
@@ -1657,7 +1645,7 @@
                 <h2 class="section-title">项目与经历</h2>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-date">2023 - 至今</div>
+                        <div class="timeline-date">2025年6月</div>
                         <div class="timeline-title">鸟类观测数据可视化与交互探索（加拿大 2000–2023）</div>
                         <div class="timeline-links">
                             <a href="https://tlsurl.com/vBird" target="_blank" class="timeline-link">在线展示</a>
@@ -1686,7 +1674,7 @@
                     </div>
 
                     <div class="timeline-item">
-                        <div class="timeline-date">2023 - 至今</div>
+                        <div class="timeline-date">2025年7月 - 至今</div>
                         <div class="timeline-title">基于大语言模型的屏幕交互式助手</div>
                         <div class="timeline-links">
                             <a href="https://tlsurl.com/lotus" target="_blank" class="timeline-link">GitHub仓库</a>
@@ -1724,19 +1712,20 @@
                 </div>
 
                 <h3 style="margin-top: 3rem; margin-bottom: 2rem; color: var(--dark-gray); font-size: 1.8rem;">其他亮点</h3>
-                <div style="background: var(--white); padding: 2rem; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); border-left: 4px solid var(--gold);">
+                <div class="highlight-card">
                     <div style="margin-bottom: 1.5rem;">
                         <h4 style="color: var(--gold); margin-bottom: 0.5rem;">语言能力</h4>
                         <ul style="list-style: none; padding: 0;">
                             <li style="margin-bottom: 0.5rem; padding-left: 1rem;">• 中文：母语</li>
-                            <li style="padding-left: 1rem;">• 英文：雅思7.0，能流利交流与阅读专业文献</li>
+                            <li style="padding-left: 1rem;">• 英文：雅思7.0，能流利交流、阅读与书写专业文献</li>
                         </ul>
                     </div>
                     <div>
                         <h4 style="color: var(--gold); margin-bottom: 0.5rem;">兴趣爱好</h4>
                         <ul style="list-style: none; padding: 0;">
                             <li style="margin-bottom: 0.5rem; padding-left: 1rem;">• 小提琴演奏（业余十级）</li>
-                            <li style="padding-left: 1rem;">• 基于生成式AI模型的音乐创作</li>
+                            <li style="margin-bottom: 0.5rem; padding-left: 1rem;">• 基于生成式AI模型的音乐创作</li>
+                            <li style="padding-left: 1rem;">• 羽毛球运动</li>
                         </ul>
                     </div>
                 </div>
