@@ -30,7 +30,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px; /* 为导航栏预留空间 */
         }
 
         body {
@@ -153,7 +152,12 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            scroll-margin-top: 60px; /* 为固定导航栏预留空间 */
+            scroll-margin-top: 70px; /* 默认导航栏高度 + 10px 缓冲 */
+        }
+
+        /* 首页特殊处理 */
+        #home {
+            scroll-margin-top: 0; /* 首页不需要偏移 */
         }
 
         section:nth-child(even) {
@@ -911,10 +915,6 @@
         }
 
         @media (max-width: 768px) {
-            html {
-                scroll-padding-top: 60px; /* 移动端导航栏高度 */
-            }
-
             /* 导航优化 */
             nav {
                 padding: 0.75rem 0;
@@ -1013,6 +1013,11 @@
             section {
                 padding: 3rem 0;
                 min-height: auto;
+                scroll-margin-top: 55px; /* 移动端导航栏高度 + 5px 缓冲 */
+            }
+
+            #home {
+                scroll-margin-top: 0;
             }
 
             .section-title {
@@ -1022,8 +1027,12 @@
         }
 
         @media (max-width: 576px) {
-            html {
-                scroll-padding-top: 50px; /* 小屏幕导航栏高度 */
+            section {
+                scroll-margin-top: 52px; /* 小屏幕更精确的偏移 */
+            }
+
+            #home {
+                scroll-margin-top: 0;
             }
 
             /* 导航栏移动端优化 */
@@ -1523,7 +1532,7 @@
                     <!-- 莫纳什大学 -->
                     <div class="education-card">
                         <div class="edu-header">
-                            <h3 class="edu-university">莫纳什大学 (QS 35)</h3>
+                            <h3 class="edu-university">莫纳什大学 (QS 36)</h3>
                             <p class="edu-degree">数据科学硕士</p>
                             <p class="edu-period">2024 - 至今</p>
                         </div>
@@ -1583,7 +1592,7 @@
                             <span class="skill-level-badge level-proficient">熟练</span>
                         </div>
                         <div class="skill-category">编程语言</div>
-                        <p class="skill-description">Data.table, Dplyr, Tidyverse等统计分析工具的深入应用</p>
+                        <p class="skill-description">Data.table, Dplyr, Tidyverse等统计分析包的深入应用</p>
                     </div>
 
                     <div class="skill-card">
@@ -1817,28 +1826,95 @@
     </section>
 
     <script>
-        // 平滑滚动和活动导航链接
+        // 获取导航高度的辅助函数
+        function getNavHeight() {
+            const nav = document.querySelector('nav');
+            return nav ? nav.offsetHeight : 60;
+        }
+
+        // 精确的锚点滚动函数
+        function smoothScrollToTarget(targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
+
+            const navHeight = getNavHeight();
+            const additionalOffset = 10; // 额外缓冲空间
+            const targetPosition = targetElement.offsetTop - navHeight - additionalOffset;
+
+            // 使用 smooth behavior 平滑滚动
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // 拦截所有导航链接点击事件
         document.addEventListener('DOMContentLoaded', function() {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
 
-            // 滚动监听，高亮当前部分
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
+            // 处理导航链接点击
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止默认跳转行为
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').slice(1) === current) {
-                        link.classList.add('active');
-                    }
+                    const targetId = this.getAttribute('href').substring(1);
+                    smoothScrollToTarget(targetId);
+
+                    // 更新活动状态
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
                 });
+            });
+
+            // 滚动监听，高亮当前部分
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                // 防抖处理
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const navHeight = getNavHeight();
+                    const scrollPosition = window.scrollY + navHeight + 20;
+                    let current = '';
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    // 特殊处理：如果滚动到顶部，激活首页
+                    if (window.scrollY < 100) {
+                        current = 'home';
+                    }
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').slice(1) === current) {
+                            link.classList.add('active');
+                        }
+                    });
+                }, 50);
+            });
+
+            // 处理页面加载时的hash
+            if (window.location.hash) {
+                setTimeout(() => {
+                    const targetId = window.location.hash.substring(1);
+                    smoothScrollToTarget(targetId);
+                }, 100);
+            }
+
+            // 处理浏览器后退/前进按钮
+            window.addEventListener('hashchange', function(e) {
+                e.preventDefault();
+                const targetId = window.location.hash.substring(1);
+                if (targetId) {
+                    smoothScrollToTarget(targetId);
+                }
             });
         });
 
@@ -1863,11 +1939,42 @@
         // 复制到剪贴板
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                alert('已复制到剪贴板：' + text);
+                // 创建临时提示
+                const tooltip = document.createElement('div');
+                tooltip.textContent = '已复制到剪贴板';
+                tooltip.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: var(--gold);
+                    color: var(--dark-gray);
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 0;
+                    z-index: 3000;
+                    animation: fadeInOut 2s ease;
+                `;
+                document.body.appendChild(tooltip);
+
+                setTimeout(() => {
+                    document.body.removeChild(tooltip);
+                }, 2000);
             }, function(err) {
                 console.error('无法复制文本：', err);
             });
         }
+
+        // 添加淡入淡出动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
