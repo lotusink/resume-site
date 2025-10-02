@@ -24,8 +24,8 @@
             --mid-gray: #4a4a4a;
             --light-gray: #f5f5f5;
             --white: #ffffff;
-            --nav-height: 60px; /* 默认导航栏高度 */
-            --nav-height-mobile: 50px; /* 移动端导航栏高度 */
+            --nav-height: 60px;
+            --nav-height-mobile: 50px;
         }
 
         html {
@@ -141,7 +141,7 @@
             background: var(--light-gray);
         }
 
-        /* 首页 Hero 部分 - 修改1: 使用calc()计算高度 */
+        /* 首页 Hero 部分 */
         #home {
             background:
                 radial-gradient(ellipse at top right, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
@@ -200,6 +200,33 @@
             opacity: 0.9;
         }
 
+        /* 联系方式按钮组 */
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-btn {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn:hover {
+            background: var(--gold);
+            color: var(--dark-gray);
+            transform: translateY(-2px);
+        }
+
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -209,12 +236,138 @@
             font-weight: bold;
             transition: all 0.3s ease;
             border: 2px solid var(--gold);
+            cursor: pointer;
         }
 
         .cta-button:hover {
             background: transparent;
             color: var(--gold);
             transform: translateY(-2px);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--mid-gray);
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--dark-gray);
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-option {
+            padding: 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: var(--gold);
+        }
+
+        .contact-option-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-option-label {
+            font-size: 0.9rem;
+            color: var(--mid-gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-option-value {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .contact-option-action {
+            padding: 0.5rem 1rem;
+            background: var(--gold);
+            color: var(--dark-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .contact-option-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .hero-image {
@@ -315,7 +468,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             width: 100%;
-            align-items: start; /* 让每个卡片保持自己的高度，不强制对齐 */
+            align-items: start;
         }
 
         .education-card {
@@ -366,7 +519,7 @@
             margin-bottom: 0.75rem;
         }
 
-        /* 课程列表优化 - 使用原生list-style */
+        /* 课程列表 */
         .courses-list {
             list-style: disc;
             padding: 0;
@@ -378,10 +531,6 @@
             padding: 0.4rem 0;
             font-size: 0.9rem;
             color: var(--mid-gray);
-            transform: translateZ(0); /* GPU加速 */
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            max-height: 50px;
-            opacity: 1;
             list-style-type: disc;
             margin-left: 0.5rem;
         }
@@ -391,51 +540,7 @@
             font-size: 1.2em;
         }
 
-        .course-item.hidden {
-            max-height: 0;
-            opacity: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            margin: 0;
-            pointer-events: none;
-            transform: translateX(-10px) translateZ(0);
-        }
-
-        /* 课程展开动画延迟 */
-        .courses-list.expanding .course-item:nth-child(6) { transition-delay: 0.05s; }
-        .courses-list.expanding .course-item:nth-child(7) { transition-delay: 0.1s; }
-        .courses-list.expanding .course-item:nth-child(8) { transition-delay: 0.15s; }
-        .courses-list.expanding .course-item:nth-child(9) { transition-delay: 0.2s; }
-
-        .courses-list.collapsing .course-item {
-            transition-delay: 0s !important;
-        }
-
-        .course-expand-btn {
-            margin-top: 1rem;
-            padding: 0.4rem 1rem;
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            width: auto;
-            transform: translateZ(0);
-        }
-
-        .course-expand-btn:hover {
-            background: var(--gold);
-            color: var(--white);
-            transform: translateY(-1px) translateZ(0);
-        }
-
-        .course-expand-btn.expanded {
-            background: var(--gold);
-            color: var(--white);
-        }
-
-        /* 技能部分 */
+        /* 技能部分 - 优化后的紧凑设计 */
         .skills-wrapper {
             width: 100%;
             max-width: 100%;
@@ -447,59 +552,16 @@
             gap: 1.5rem;
             width: 100%;
             max-width: 100%;
-            margin-bottom: 1.5rem; /* 从2rem减少到1.5rem */
         }
 
         .skill-card {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 1.25rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border-top: 3px solid var(--gold);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            will-change: transform, opacity;
-            transform: translateZ(0); /* GPU加速 */
-        }
-
-        /* 优化的隐藏/显示动画 */
-        .skill-card.hidden {
-            max-height: 0;
-            opacity: 0;
-            transform: translateY(-20px) translateZ(0);
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            border-top-width: 0;
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .skill-card.visible {
-            max-height: 300px;
-            opacity: 1;
-            transform: translateY(0) translateZ(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* 批量动画 - 使用CSS动画延迟 */
-        .skills-container.expanding .skill-card:nth-child(4) { transition-delay: 0.05s; }
-        .skills-container.expanding .skill-card:nth-child(5) { transition-delay: 0.1s; }
-        .skills-container.expanding .skill-card:nth-child(6) { transition-delay: 0.15s; }
-        .skills-container.expanding .skill-card:nth-child(7) { transition-delay: 0.2s; }
-        .skills-container.expanding .skill-card:nth-child(8) { transition-delay: 0.25s; }
-        .skills-container.expanding .skill-card:nth-child(9) { transition-delay: 0.3s; }
-        .skills-container.expanding .skill-card:nth-child(10) { transition-delay: 0.35s; }
-        .skills-container.expanding .skill-card:nth-child(11) { transition-delay: 0.4s; }
-        .skills-container.expanding .skill-card:nth-child(12) { transition-delay: 0.45s; }
-        .skills-container.expanding .skill-card:nth-child(13) { transition-delay: 0.5s; }
-        .skills-container.expanding .skill-card:nth-child(14) { transition-delay: 0.55s; }
-        .skills-container.expanding .skill-card:nth-child(15) { transition-delay: 0.6s; }
-
-        .skills-container.collapsing .skill-card {
-            transition-delay: 0s !important;
         }
 
         .skill-card::before {
@@ -514,46 +576,41 @@
             transition: opacity 0.3s ease;
         }
 
-        .skill-card:not(.hidden):hover::before {
+        .skill-card:hover::before {
             opacity: 1;
         }
 
-        .skill-card:not(.hidden):hover {
-            transform: translateY(-5px) translateZ(0);
+        .skill-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
-        .skill-category {
-            font-size: 0.85rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 0.75rem;
-            font-weight: 600;
         }
 
         .skill-title {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--dark-gray);
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-description {
-            font-size: 0.9rem;
-            color: var(--mid-gray);
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            flex-grow: 1;
         }
 
         .skill-level-badge {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
             font-weight: 500;
-            align-self: flex-start;
+        }
+
+        /* 新的熟练度等级样式 */
+        .level-master {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            color: #B8860B;
+            border: 1px solid rgba(255, 215, 0, 0.4);
         }
 
         .level-proficient {
@@ -574,64 +631,18 @@
             border: 1px solid rgba(108, 117, 125, 0.2);
         }
 
-        /* 展开按钮 */
-        .skills-expand-btn {
-            display: block;
-            margin: 0 auto;
-            padding: 0.75rem 2rem;
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .skill-category {
+            font-size: 0.8rem;
+            color: var(--mid-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
         }
 
-        .skills-expand-btn:hover {
-            background: var(--gold);
-            color: var(--dark-gray);
-            transform: translateY(-2px);
-        }
-
-        .skills-expand-btn.expanded {
-            background: var(--gold);
-            color: var(--dark-gray);
-        }
-
-        /* 响应式设计 - 技能部分 */
-        @media (max-width: 992px) {
-            .skills-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .skills-container {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .skill-card {
-                padding: 1.25rem;
-            }
-
-            .skill-title {
-                font-size: 1.1rem;
-            }
-
-            .skill-description {
-                font-size: 0.85rem;
-            }
-
-            /* 移动端按钮紧贴卡片 */
-            .skills-expand-btn {
-                margin-top: 1rem;
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
-            }
+        .skill-description {
+            font-size: 0.85rem;
+            color: var(--mid-gray);
+            line-height: 1.5;
         }
 
         /* 经验部分 */
@@ -827,50 +838,8 @@
             transform: translateX(-50%);
         }
 
-        .contact-info-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--white);
-            transition: color 0.3s ease;
-        }
-
-        .contact-item:hover {
-            color: var(--gold);
-        }
-
-        .contact-item-icon {
-            font-size: 1.2rem;
-            color: var(--gold);
-        }
-
-        .contact-item-text {
-            font-size: 1rem;
-        }
-
-        .contact-item a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--light-gold);
-        }
-
         .footer-note {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            margin-top: 2rem;
             color: var(--light-gray);
             opacity: 0.8;
             font-size: 0.9rem;
@@ -902,26 +871,7 @@
         /* 响应式设计 */
         @media (max-width: 992px) {
             .skills-container {
-                grid-template-columns: 1fr;
-            }
-
-            .skill-group.full-width {
-                grid-column: span 1;
-            }
-
-            .skill-group.full-width .skill-items {
-                display: flex !important;
-                flex-direction: column;
-            }
-
-            .skill-group.full-width .skill-main {
-                border-left: none !important;
-                padding-left: 0 !important;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-            }
-
-            .skill-group.full-width .skill-main:last-child {
-                border-bottom: none;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -966,6 +916,11 @@
                 font-size: 1.5rem;
             }
 
+            .contact-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
             .profile-box {
                 width: 200px;
                 height: 200px;
@@ -982,15 +937,9 @@
                 grid-template-columns: 1fr;
             }
 
-            /* 移动端课程列表 */
-            .courses-list {
-                padding-left: 1.2rem;
-            }
-
-            .course-item {
-                font-size: 0.85rem;
-                line-height: 1.5;
-                margin-left: 0.3rem;
+            /* 技能 */
+            .skills-container {
+                grid-template-columns: 1fr;
             }
 
             /* 时间线 */
@@ -1012,12 +961,6 @@
                 font-size: 2rem;
                 margin-bottom: 2rem;
             }
-
-            /* 联系方式 */
-            .contact-info-wrapper {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
         }
 
         @media (max-width: 576px) {
@@ -1025,7 +968,7 @@
             nav {
                 padding: 0.6rem 0;
                 background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
-                height: auto; /* 让导航栏自适应高度 */
+                height: auto;
             }
 
             /* 修复移动端首页高度 */
@@ -1038,19 +981,18 @@
                 align-items: center;
             }
 
-            /* 为移动端添加一个占位元素 */
             #home::after {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 50px; /* 移动端导航栏高度 */
+                height: 50px;
                 background: transparent;
             }
 
             #home .container {
-                padding-top: calc(50px + 2rem); /* 导航栏高度 + 额外间距 */
+                padding-top: calc(50px + 2rem);
             }
 
             .nav-menu {
@@ -1090,6 +1032,16 @@
                 font-size: 1rem;
                 line-height: 1.6;
                 margin-bottom: 1.5rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
             }
 
             .cta-button {
@@ -1148,7 +1100,7 @@
                 font-size: 1.1rem;
             }
 
-            /* 移动端小屏幕课程列表 */
+            /* 移动端课程列表 */
             .courses-list {
                 padding-left: 1rem;
             }
@@ -1159,97 +1111,31 @@
                 margin-left: 0.2rem;
             }
 
-            /* 项目部分移动端 */
-            .timeline-links {
-                gap: 1rem;
-                font-size: 0.85rem;
-            }
-
-            .timeline-link {
-                font-size: 0.85rem;
-            }
-
-            .project-description p {
-                font-size: 0.9rem;
-            }
-
-            .project-section-title {
-                font-size: 0.95rem;
-            }
-
-            .project-content {
-                font-size: 0.9rem;
-                padding-left: 0.75rem;
-            }
-
-            .project-tech-list {
-                padding-left: 0.75rem;
-            }
-
-            .project-tech-list li {
-                font-size: 0.9rem;
-                margin-bottom: 0.6rem;
-                padding-left: 1rem;
-            }
-
-            .timeline-title {
-                font-size: 1.2rem;
-                line-height: 1.3;
-            }
-
             /* 技能部分移动端优化 */
             .skills-container {
                 gap: 1rem;
             }
 
-            .skills-expand-btn {
-                margin-top: 0.8rem; /* 按钮与卡片的间距 */
+            .skill-card {
+                padding: 1rem;
             }
 
-            .skill-group {
-                padding: 1.25rem;
-                border-left-width: 3px;
-            }
-
-            .skill-group:hover {
-                transform: translateY(-3px);
-                border-left-width: 4px;
-            }
-
-            .skill-group-title {
-                font-size: 1rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .skill-items {
+            .skill-header {
+                flex-direction: row;
                 gap: 0.5rem;
             }
 
-            .skill-main {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 0.5rem 0;
-                gap: 0.5rem;
-            }
-
-            .skill-name-wrapper {
-                width: 100%;
-            }
-
-            .skill-name {
+            .skill-title {
                 font-size: 1rem;
             }
 
-            .skill-tools {
+            .skill-level-badge {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.4rem;
+            }
+
+            .skill-description {
                 font-size: 0.8rem;
-                color: var(--mid-gray);
-                margin-top: 0.2rem;
-            }
-
-            .skill-level {
-                font-size: 0.85rem;
-                padding: 0.2rem 0.6rem;
-                align-self: flex-start;
             }
 
             /* 时间线移动端优化 */
@@ -1303,6 +1189,39 @@
                 font-size: 0.85rem;
             }
 
+            /* 项目部分移动端 */
+            .timeline-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .timeline-link {
+                font-size: 0.85rem;
+            }
+
+            .project-description p {
+                font-size: 0.9rem;
+            }
+
+            .project-section-title {
+                font-size: 0.95rem;
+            }
+
+            .project-content {
+                font-size: 0.9rem;
+                padding-left: 0.75rem;
+            }
+
+            .project-tech-list {
+                padding-left: 0.75rem;
+            }
+
+            .project-tech-list li {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+                padding-left: 1rem;
+            }
+
             /* 其他亮点移动端 */
             h3 {
                 font-size: 1.5rem !important;
@@ -1326,47 +1245,29 @@
                 padding: 2.5rem 0;
             }
 
-            .contact-info-wrapper {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .contact-item-text {
-                font-size: 0.95rem;
-            }
-
             .footer-note {
-                margin-top: 2rem;
-                padding-top: 1.5rem;
                 font-size: 0.85rem;
             }
 
-            /* 动画优化 - 保留但减弱 */
-            @keyframes fadeInLeft {
-                from {
-                    opacity: 0;
-                    transform: translateX(-30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+            /* 弹窗移动端优化 */
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
             }
 
-            @keyframes fadeInRight {
-                from {
-                    opacity: 0;
-                    transform: translateX(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+            .modal-title {
+                font-size: 1.25rem;
             }
 
-            /* 保留噪点纹理但优化性能 */
-            body::before {
-                background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.01) 100%);
+            .contact-option {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .contact-option-action {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -1399,10 +1300,6 @@
                 font-size: 1.5rem;
             }
 
-            .skill-group {
-                padding: 1rem;
-            }
-
             .timeline-item {
                 padding: 1rem;
             }
@@ -1430,13 +1327,12 @@
                 min-height: 44px;
             }
 
-            .contact-item a {
-                padding: 0.5rem;
-                display: inline-block;
+            .contact-btn {
+                min-height: 44px;
             }
 
             /* 移除hover效果，改为tap效果 */
-            .skill-group:active {
+            .skill-card:active {
                 transform: scale(0.98);
             }
 
@@ -1468,10 +1364,20 @@
                     <h1>陈鹏羽</h1>
                     <h2>数据科学研究生</h2>
                     <p>
-                        莫纳什大学数据科学硕士在读，拥有扎实的统计学基础和丰富的数据分析经验。
-                        擅长机器学习、大数据处理和数据可视化，致力于用数据驱动决策，创造价值。
+                        莫纳什大学数据科学硕士在读（QS 2026 第36位，预计 2026 年 7 月毕业）。扎实的统计学与数据分析背景，擅长大数据处理、机器学习和可视化，具备 LLM 应用与智能体开发经验，专注于以数据智能驱动决策与创新。
                     </p>
-                    <a href="#contact" class="cta-button">联系我</a>
+                    <div class="contact-buttons">
+                        <button class="contact-btn" onclick="showContactModal()">
+                            📧 邮件
+                        </button>
+                        <button class="contact-btn" onclick="showContactModal()">
+                            💬 微信
+                        </button>
+                        <button class="contact-btn" onclick="showContactModal()">
+                            📱 电话
+                        </button>
+                    </div>
+                    <button class="cta-button" onclick="showContactModal()">联系我</button>
                 </div>
                 <div class="hero-image">
                     <div class="profile-box">羽</div>
@@ -1479,6 +1385,39 @@
             </div>
         </div>
     </section>
+
+    <!-- 联系弹窗 -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">联系方式</h3>
+                <button class="close-modal" onclick="closeContactModal()">&times;</button>
+            </div>
+            <div class="contact-options">
+                <div class="contact-option">
+                    <div class="contact-option-info">
+                        <span class="contact-option-label">电子邮件</span>
+                        <span class="contact-option-value">your.email@example.com</span>
+                    </div>
+                    <a href="mailto:your.email@example.com" class="contact-option-action">发送邮件</a>
+                </div>
+                <div class="contact-option">
+                    <div class="contact-option-info">
+                        <span class="contact-option-label">微信</span>
+                        <span class="contact-option-value">YourWeChatID</span>
+                    </div>
+                    <button class="contact-option-action" onclick="copyToClipboard('YourWeChatID')">复制微信号</button>
+                </div>
+                <div class="contact-option">
+                    <div class="contact-option-info">
+                        <span class="contact-option-label">电话</span>
+                        <span class="contact-option-value">+86 138 0000 0000</span>
+                    </div>
+                    <a href="tel:+8613800000000" class="contact-option-action">拨打电话</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 关于 -->
     <section id="about">
@@ -1513,7 +1452,7 @@
                 <!-- 教育背景网格 -->
                 <div class="education-grid">
                     <!-- 莫纳什大学 -->
-                    <div class="education-card" id="monash-card">
+                    <div class="education-card">
                         <div class="edu-header">
                             <h3 class="edu-university">莫纳什大学 (QS 35)</h3>
                             <p class="edu-degree">数据科学硕士</p>
@@ -1527,19 +1466,16 @@
                                 <li class="course-item">数据库概论 (Introduction to Databases)</li>
                                 <li class="course-item">大数据处理 (Data Processing for Big Data)</li>
                                 <li class="course-item">计算机网络与架构 (Computer Architecture and Networks)</li>
-                                <li class="course-item hidden">Python编程 (Algorithms and Programming in Python)</li>
-                                <li class="course-item hidden">项目管理 (Project Management)</li>
-                                <li class="course-item hidden">IT研究方法 (IT Research and Innovation Methods)</li>
-                                <li class="course-item hidden">生物信息学 (Introduction to Bioinformatics)</li>
+                                <li class="course-item">Python编程 (Algorithms and Programming in Python)</li>
+                                <li class="course-item">项目管理 (Project Management)</li>
+                                <li class="course-item">IT研究方法 (IT Research and Innovation Methods)</li>
+                                <li class="course-item">生物信息学 (Introduction to Bioinformatics)</li>
                             </ul>
-                            <button class="course-expand-btn" onclick="toggleCourses(this, 'monash-card')">
-                                <span class="expand-text">查看全部</span>
-                            </button>
                         </div>
                     </div>
 
                     <!-- 浙大城市学院 -->
-                    <div class="education-card" id="zucc-card">
+                    <div class="education-card">
                         <div class="edu-header">
                             <h3 class="edu-university">浙大城市学院</h3>
                             <p class="edu-degree">大数据技术与数据科学学士</p>
@@ -1553,14 +1489,11 @@
                                 <li class="course-item">应用随机过程</li>
                                 <li class="course-item">预测与决策概论</li>
                                 <li class="course-item">贝叶斯统计</li>
-                                <li class="course-item hidden">机器学习</li>
-                                <li class="course-item hidden">数据库原理</li>
-                                <li class="course-item hidden">数据结构基础</li>
-                                <li class="course-item hidden">程序设计基础与实验</li>
+                                <li class="course-item">机器学习</li>
+                                <li class="course-item">数据库原理</li>
+                                <li class="course-item">数据结构基础</li>
+                                <li class="course-item">程序设计基础与实验</li>
                             </ul>
-                            <button class="course-expand-btn" onclick="toggleCourses(this, 'zucc-card')">
-                                <span class="expand-text">查看全部</span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -1573,120 +1506,145 @@
         <div class="container">
             <div class="skills-wrapper">
                 <h2 class="section-title">专业技能</h2>
-                <div class="skills-content">
-                    <div class="skills-container">
-                        <!-- 熟练技能 -->
-                        <div class="skill-card" data-level="proficient">
-                            <div class="skill-category">编程语言</div>
-                            <h3 class="skill-title">Python</h3>
-                            <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
-                            <span class="skill-level-badge level-proficient">熟练</span>
-                        </div>
-
-                        <div class="skill-card" data-level="proficient">
-                            <div class="skill-category">编程语言</div>
+                <div class="skills-container">
+                    <!-- 精通技能 -->
+                    <div class="skill-card">
+                        <div class="skill-header">
                             <h3 class="skill-title">R语言</h3>
-                            <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
-                            <span class="skill-level-badge level-proficient">熟练</span>
+                            <span class="skill-level-badge level-master">精通</span>
                         </div>
-
-                        <div class="skill-card" data-level="proficient">
-                            <div class="skill-category">数据处理</div>
-                            <h3 class="skill-title">数据清洗</h3>
-                            <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
-                            <span class="skill-level-badge level-proficient">熟练</span>
-                        </div>
-
-                        <!-- 初始隐藏的熟练技能 -->
-                        <div class="skill-card hidden" data-level="proficient">
-                            <div class="skill-category">数据处理</div>
-                            <h3 class="skill-title">数据可视化</h3>
-                            <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
-                            <span class="skill-level-badge level-proficient">熟练</span>
-                        </div>
-
-                        <!-- 掌握技能 -->
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">大数据</div>
-                            <h3 class="skill-title">PySpark</h3>
-                            <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">分布式机器学习</div>
-                            <h3 class="skill-title">分布式模型开发</h3>
-                            <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">数据库</div>
-                            <h3 class="skill-title">SQL</h3>
-                            <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">机器学习</div>
-                            <h3 class="skill-title">深度学习</h3>
-                            <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">机器学习</div>
-                            <h3 class="skill-title">传统机器学习</h3>
-                            <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">统计分析</div>
-                            <h3 class="skill-title">统计建模</h3>
-                            <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="competent">
-                            <div class="skill-category">Web开发</div>
-                            <h3 class="skill-title">R Shiny</h3>
-                            <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
-                            <span class="skill-level-badge level-competent">掌握</span>
-                        </div>
-
-                        <!-- 了解技能 -->
-                        <div class="skill-card hidden" data-level="familiar">
-                            <div class="skill-category">编程语言</div>
-                            <h3 class="skill-title">C语言</h3>
-                            <p class="skill-description">系统编程基础，数据结构实现</p>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="familiar">
-                            <div class="skill-category">编程语言</div>
-                            <h3 class="skill-title">Java</h3>
-                            <p class="skill-description">面向对象编程，基础应用开发</p>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="familiar">
-                            <div class="skill-category">GUI开发</div>
-                            <h3 class="skill-title">Qt Designer</h3>
-                            <p class="skill-description">桌面应用界面设计与开发</p>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
-
-                        <div class="skill-card hidden" data-level="familiar">
-                            <div class="skill-category">API集成</div>
-                            <h3 class="skill-title">OpenAI API</h3>
-                            <p class="skill-description">大语言模型API调用，异步编程实践</p>
-                            <span class="skill-level-badge level-familiar">了解</span>
-                        </div>
+                        <div class="skill-category">编程语言</div>
+                        <p class="skill-description">data.table, ggplot2, dplyr, tidyverse等统计分析和可视化工具的深入应用</p>
                     </div>
-                    <button class="skills-expand-btn" onclick="toggleSkills(this)">
-                        <span class="btn-text">查看全部技能</span>
-                    </button>
+
+                    <!-- 熟练技能 -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Python</h3>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
+                        <div class="skill-category">编程语言</div>
+                        <p class="skill-description">NumPy, Pandas, Matplotlib, Scikit-learn等科学计算和数据分析库的熟练运用</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">数据清洗</h3>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
+                        <div class="skill-category">数据处理</div>
+                        <p class="skill-description">ETL流程设计、数据质量控制、异常检测和处理的实践经验</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">数据可视化</h3>
+                            <span class="skill-level-badge level-proficient">熟练</span>
+                        </div>
+                        <div class="skill-category">数据处理</div>
+                        <p class="skill-description">Matplotlib和ggplot2创建专业的数据可视化图表</p>
+                    </div>
+
+                    <!-- 掌握技能 -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">PySpark</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">大数据</div>
+                        <p class="skill-description">大数据处理框架，分布式计算和PySpark MLlib机器学习库</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">分布式模型开发</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">分布式机器学习</div>
+                        <p class="skill-description">基于PySpark MLlib的Gradient Boost和Random Forest参数调优</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">SQL</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">数据库</div>
+                        <p class="skill-description">查询优化、数据建模、复杂查询编写能力</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">深度学习</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">机器学习</div>
+                        <p class="skill-description">PyTorch框架，神经网络设计与训练</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">传统机器学习</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">机器学习</div>
+                        <p class="skill-description">Sklearn库，随机森林、SVM等经典算法的应用</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">统计建模</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">统计分析</div>
+                        <p class="skill-description">回归分析、时间序列分析、假设检验等统计方法</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">R Shiny</h3>
+                            <span class="skill-level-badge level-competent">掌握</span>
+                        </div>
+                        <div class="skill-category">Web开发</div>
+                        <p class="skill-description">交互式Web应用开发，数据可视化平台搭建</p>
+                    </div>
+
+                    <!-- 了解技能 -->
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">C语言</h3>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
+                        <div class="skill-category">编程语言</div>
+                        <p class="skill-description">系统编程基础，数据结构实现</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Java</h3>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
+                        <div class="skill-category">编程语言</div>
+                        <p class="skill-description">面向对象编程，基础应用开发</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">Qt Designer</h3>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
+                        <div class="skill-category">GUI开发</div>
+                        <p class="skill-description">桌面应用界面设计与开发</p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <h3 class="skill-title">OpenAI API</h3>
+                            <span class="skill-level-badge level-familiar">了解</span>
+                        </div>
+                        <div class="skill-category">API集成</div>
+                        <p class="skill-description">大语言模型API调用，异步编程实践</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1790,21 +1748,9 @@
     <section id="contact">
         <div class="container">
             <div class="contact-content">
-                <h2 class="section-title">联系方式</h2>
-                <div class="contact-info-wrapper">
-                    <div class="contact-item">
-                        <span class="contact-item-text">
-                            <a href="mailto:your.email@example.com">your.email@example.com</a>
-                        </span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-item-text">
-                            <a href="#" target="_blank">LinkedIn</a>
-                        </span>
-                    </div>
-                </div>
+                <h2 class="section-title">感谢您的关注</h2>
                 <div class="footer-note">
-                    © 2025 陈鹏羽 | 感谢您的关注
+                    © 2025 陈鹏羽 | 期待与您交流
                 </div>
             </div>
         </div>
@@ -1834,114 +1780,33 @@
                     }
                 });
             });
-
-            // 初始化技能卡片状态
-            const skillCards = document.querySelectorAll('.skill-card');
-            skillCards.forEach((card, index) => {
-                if (index >= 3) {
-                    card.classList.add('hidden');
-                } else {
-                    card.classList.add('visible');
-                }
-            });
         });
 
-        // 优化的技能展开/收起功能
-        function toggleSkills(button) {
-            const container = document.querySelector('.skills-container');
-            const allCards = document.querySelectorAll('.skill-card');
-            const btnText = button.querySelector('.btn-text');
+        // 显示联系弹窗
+        function showContactModal() {
+            document.getElementById('contactModal').classList.add('show');
+        }
 
-            if (button.classList.contains('expanded')) {
-                // 收起
-                container.classList.remove('expanding');
-                container.classList.add('collapsing');
+        // 关闭联系弹窗
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('show');
+        }
 
-                // 使用 requestAnimationFrame 批量更新DOM
-                requestAnimationFrame(() => {
-                    allCards.forEach((card, index) => {
-                        if (index >= 3) {
-                            card.classList.add('hidden');
-                            card.classList.remove('visible');
-                        }
-                    });
-                    button.classList.remove('expanded');
-                    btnText.textContent = '查看全部技能';
-                });
-
-                // 延迟后清理类名
-                setTimeout(() => {
-                    container.classList.remove('collapsing');
-                    document.getElementById('skills').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 400);
-            } else {
-                // 展开
-                container.classList.remove('collapsing');
-                container.classList.add('expanding');
-
-                // 批量更新DOM
-                requestAnimationFrame(() => {
-                    allCards.forEach((card, index) => {
-                        if (index >= 3) {
-                            card.classList.remove('hidden');
-                            card.classList.add('visible');
-                        }
-                    });
-                    button.classList.add('expanded');
-                    btnText.textContent = '收起技能';
-                });
-
-                // 清理类名
-                setTimeout(() => {
-                    container.classList.remove('expanding');
-                }, 700);
+        // 点击弹窗外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                closeContactModal();
             }
         }
 
-        // 优化的课程展开/收起功能
-        function toggleCourses(button, cardId) {
-            const courseCard = document.getElementById(cardId);
-            const coursesList = courseCard.querySelector('.courses-list');
-            const allItems = courseCard.querySelectorAll('.course-item');
-            const expandText = button.querySelector('.expand-text');
-
-            if (button.classList.contains('expanded')) {
-                // 收起
-                coursesList.classList.remove('expanding');
-                coursesList.classList.add('collapsing');
-
-                requestAnimationFrame(() => {
-                    allItems.forEach((item, index) => {
-                        if (index >= 5) {
-                            item.classList.add('hidden');
-                        }
-                    });
-                    button.classList.remove('expanded');
-                    expandText.textContent = '查看全部';
-                });
-
-                setTimeout(() => {
-                    coursesList.classList.remove('collapsing');
-                }, 300);
-            } else {
-                // 展开
-                coursesList.classList.remove('collapsing');
-                coursesList.classList.add('expanding');
-
-                requestAnimationFrame(() => {
-                    allItems.forEach((item, index) => {
-                        if (index >= 5) {
-                            item.classList.remove('hidden');
-                        }
-                    });
-                    button.classList.add('expanded');
-                    expandText.textContent = '收起';
-                });
-
-                setTimeout(() => {
-                    coursesList.classList.remove('expanding');
-                }, 400);
-            }
+        // 复制到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('已复制到剪贴板：' + text);
+            }, function(err) {
+                console.error('无法复制文本：', err);
+            });
         }
     </script>
 </body>
