@@ -365,30 +365,29 @@
             margin-bottom: 0.75rem;
         }
 
-        /* 课程列表优化 - 修改2: 增加padding-left */
+        /* 课程列表优化 - 使用原生list-style */
         .courses-list {
-            list-style: none;
+            list-style: disc;
             padding: 0;
+            padding-left: 1.5rem;
             overflow: hidden;
         }
 
         .course-item {
             padding: 0.4rem 0;
-            padding-left: 2rem; /* 从1.5rem增加到2rem */
-            position: relative;
             font-size: 0.9rem;
             color: var(--mid-gray);
             transform: translateZ(0); /* GPU加速 */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             max-height: 50px;
             opacity: 1;
+            list-style-type: disc;
+            margin-left: 0.5rem;
         }
 
-        .course-item::before {
-            content: '•';
-            position: absolute;
-            left: 0.75rem; /* 从0.5rem增加到0.75rem */
+        .course-item::marker {
             color: var(--gold);
+            font-size: 1.2em;
         }
 
         .course-item.hidden {
@@ -975,13 +974,15 @@
                 grid-template-columns: 1fr;
             }
 
-            /* 移动端课程列表增加更多padding */
-            .course-item {
-                padding-left: 2.5rem;
+            /* 移动端课程列表 */
+            .courses-list {
+                padding-left: 1.2rem;
             }
 
-            .course-item::before {
-                left: 1rem;
+            .course-item {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-left: 0.3rem;
             }
 
             /* 时间线 */
@@ -1139,16 +1140,15 @@
                 font-size: 1.1rem;
             }
 
-            /* 移动端小屏幕课程列表进一步优化 */
-            .course-item {
-                font-size: 0.85rem;
-                padding-left: 2.5rem; /* 保持足够的空间 */
-                line-height: 1.5;
+            /* 移动端小屏幕课程列表 */
+            .courses-list {
+                padding-left: 1rem;
             }
 
-            .course-item::before {
-                left: 1rem; /* 确保黄点和文字有足够间距 */
-                font-size: 1.2rem; /* 稍微增大黄点 */
+            .course-item {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-left: 0.2rem;
             }
 
             /* 项目部分移动端 */
@@ -1396,13 +1396,13 @@
             }
 
             /* 超小屏幕下课程列表 */
-            .course-item {
-                font-size: 0.8rem;
-                padding-left: 2.2rem;
+            .courses-list {
+                padding-left: 0.8rem;
             }
 
-            .course-item::before {
-                left: 0.8rem;
+            .course-item {
+                font-size: 0.8rem;
+                margin-left: 0.1rem;
             }
         }
 
