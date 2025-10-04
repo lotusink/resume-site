@@ -455,7 +455,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             width: 100%;
-            align-items: start;
+            align-items: stretch;
         }
 
         .education-card {
@@ -465,6 +465,8 @@
             transition: transform 0.3s ease;
             border-top: 3px solid var(--gold);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .education-card:hover {
@@ -1496,22 +1498,55 @@
                     <!-- 莫纳什大学 -->
                     <div class="education-card">
                         <div class="edu-header">
-                            <h3 class="edu-university">莫纳什大学 (Monash University, QS 36)</h3>
-                            <p class="edu-degree">数据科学硕士 (Master of Data Science)</p>
+                            <h3 class="edu-university">
+                                莫纳什大学
+                                <div style="font-size: 0.75rem; font-weight: 400; color: var(--mid-gray); margin-top: 0.25rem;">Monash University, QS 36</div>
+                            </h3>
+                            <p class="edu-degree">
+                                数据科学硕士
+                                <span style="display: block; font-size: 0.75rem; font-weight: 400; color: var(--mid-gray); margin-top: 0.25rem;">Master of Data Science</span>
+                            </p>
                             <p class="edu-period">2024 - 至今</p>
                         </div>
                         <div class="edu-courses">
                             <h4 class="courses-title">主修课程：</h4>
                             <ul class="courses-list">
-                                <li class="course-item">数据清洗 (Data Wrangling)</li>
-                                <li class="course-item">机器学习 (Machine Learning)</li>
-                                <li class="course-item">数据库概论 (Introduction to Databases)</li>
-                                <li class="course-item">大数据处理 (Data Processing for Big Data)</li>
-                                <li class="course-item">计算机网络与架构 (Computer Architecture and Networks)</li>
-                                <li class="course-item">Python编程 (Algorithms and Programming in Python)</li>
-                                <li class="course-item">项目管理 (Project Management)</li>
-                                <li class="course-item">IT研究方法 (IT Research and Innovation Methods)</li>
-                                <li class="course-item">生物信息学 (Introduction to Bioinformatics)</li>
+                                <li class="course-item">
+                                    数据清洗
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Data Wrangling</div>
+                                </li>
+                                <li class="course-item">
+                                    机器学习
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Machine Learning</div>
+                                </li>
+                                <li class="course-item">
+                                    数据库概论
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Introduction to Databases</div>
+                                </li>
+                                <li class="course-item">
+                                    大数据处理
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Data Processing for Big Data</div>
+                                </li>
+                                <li class="course-item">
+                                    计算机网络与架构
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Computer Architecture and Networks</div>
+                                </li>
+                                <li class="course-item">
+                                    Python编程
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Algorithms and Programming in Python</div>
+                                </li>
+                                <li class="course-item">
+                                    项目管理
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Project Management</div>
+                                </li>
+                                <li class="course-item">
+                                    IT研究方法
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">IT Research and Innovation Methods</div>
+                                </li>
+                                <li class="course-item">
+                                    生物信息学
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Introduction to Bioinformatics</div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1519,22 +1554,55 @@
                     <!-- 浙大城市学院 -->
                     <div class="education-card">
                         <div class="edu-header">
-                            <h3 class="edu-university">浙大城市学院</h3>
-                            <p class="edu-degree">大数据技术与数据科学学士</p>
+                            <h3 class="edu-university">
+                                浙大城市学院
+                                <div style="font-size: 0.75rem; font-weight: 400; color: var(--mid-gray); margin-top: 0.25rem;">Hangzhou City University</div>
+                            </h3>
+                            <p class="edu-degree">
+                                大数据技术与数据科学学士
+                                <span style="display: block; font-size: 0.75rem; font-weight: 400; color: var(--mid-gray); margin-top: 0.25rem;">Bachelor of Data Science and Big Data Technology</span>
+                            </p>
                             <p class="edu-period">2019 - 2023</p>
                         </div>
                         <div class="edu-courses">
                             <h4 class="courses-title">主修课程：</h4>
                             <ul class="courses-list">
-                                <li class="course-item">回归分析</li>
-                                <li class="course-item">时间序列分析</li>
-                                <li class="course-item">应用随机过程</li>
-                                <li class="course-item">预测与决策概论</li>
-                                <li class="course-item">贝叶斯统计</li>
-                                <li class="course-item">机器学习</li>
-                                <li class="course-item">数据库原理</li>
-                                <li class="course-item">数据结构基础</li>
-                                <li class="course-item">程序设计基础与实验</li>
+                                <li class="course-item">
+                                    回归分析
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Regression Analysis</div>
+                                </li>
+                                <li class="course-item">
+                                    时间序列分析
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Time Series Analysis</div>
+                                </li>
+                                <li class="course-item">
+                                    应用随机过程
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Applied Stochastic Processes</div>
+                                </li>
+                                <li class="course-item">
+                                    预测与决策概论
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">The Introduction of Forecasting and Decision</div>
+                                </li>
+                                <li class="course-item">
+                                    贝叶斯统计
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Bayesian Statistics</div>
+                                </li>
+                                <li class="course-item">
+                                    机器学习
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Machine Learning</div>
+                                </li>
+                                <li class="course-item">
+                                    数据库原理
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Database Principles</div>
+                                </li>
+                                <li class="course-item">
+                                    数据结构基础
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Basics of Data Structure</div>
+                                </li>
+                                <li class="course-item">
+                                    程序设计基础与实验
+                                    <div style="font-size: 0.75rem; color: var(--mid-gray); margin-top: 0.1rem;">Programming Foundation and Experiment</div>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1623,16 +1691,27 @@
                         </div>
                     </div>
 
+                    <!-- 大模型应用开发 -->
+                    <div class="skill-module">
+                        <div class="skill-module-header">
+                            <h3 class="skill-module-title">大模型应用开发</h3>
+                        </div>
+                        <p class="skill-module-description">能够利用 OpenAI API 与 Hugging Face Transformers 包调用大模型，开发基于大模型的应用系统。</p>
+                        <div class="skill-keywords">
+                            <span class="skill-keyword level-competent">OpenAI API</span>
+                            <span class="skill-keyword level-competent">Transformers</span>
+                        </div>
+                    </div>
+
                     <!-- 辅助与工具支持能力 -->
-                    <div class="skill-module skill-module-full">
+                    <div class="skill-module">
                         <div class="skill-module-header">
                             <h3 class="skill-module-title">辅助与工具支持能力</h3>
                         </div>
-                        <p class="skill-module-description">具有使用 Qt Designer 搭建应用界面、QThread 实现异步处理的实践经验，能够利用 OpenAI API 与 Hugging Face Transformers 包调用大模型，且对 C 和 Java 的编程思想有一定理解。</p>
+                        <p class="skill-module-description">具有使用 Qt Designer 搭建应用界面、QThread 实现异步处理的实践经验，且对 C 和 Java 的编程思想有一定理解。</p>
                         <div class="skill-keywords">
                             <span class="skill-keyword level-competent">Qt Designer</span>
                             <span class="skill-keyword level-competent">QThread</span>
-                            <span class="skill-keyword level-familiar">OpenAI API / transformers</span>
                             <span class="skill-keyword level-familiar">C 语言</span>
                             <span class="skill-keyword level-familiar">Java</span>
                         </div>
@@ -1651,13 +1730,17 @@
                     <div class="timeline-item">
                         <div class="timeline-date">2025年6月</div>
                         <div class="timeline-title">鸟类观测数据可视化与交互探索（加拿大 2000–2023）</div>
-                        <div class="timeline-links">
-                            <a href="https://tlsurl.com/vBird" target="_blank" class="timeline-link">在线展示</a>
-                            <a href="https://github.com/lotusink/vBird" target="_blank" class="timeline-link">GitHub仓库</a>
-                        </div>
 
                         <div class="project-description">
                             <p>构建交互式可视化平台,帮助非专业用户直观探索加拿大 2000–2023 年鸟类观测在空间、时间及气候因素下的分布规律。</p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">相关链接</h4>
+                            <div class="timeline-links">
+                                <a href="https://tlsurl.com/vBird" target="_blank" class="timeline-link">在线展示</a>
+                                <a href="https://github.com/lotusink/vBird" target="_blank" class="timeline-link">GitHub仓库</a>
+                            </div>
                         </div>
 
                         <div class="project-section">
@@ -1680,12 +1763,16 @@
                     <div class="timeline-item">
                         <div class="timeline-date">2025年7月 - 至今</div>
                         <div class="timeline-title">基于大语言模型的屏幕交互式助手</div>
-                        <div class="timeline-links">
-                            <a href="https://github.com/lotusink/Lotus" target="_blank" class="timeline-link">GitHub仓库</a>
-                        </div>
 
                         <div class="project-description">
                             <p>开发多模态 LLM 悬浮式助手,实现对屏幕内容的实时解析与智能问答。</p>
+                        </div>
+
+                        <div class="project-section">
+                            <h4 class="project-section-title">相关链接</h4>
+                            <div class="timeline-links">
+                                <a href="https://github.com/lotusink/Lotus" target="_blank" class="timeline-link">GitHub仓库</a>
+                            </div>
                         </div>
 
                         <div class="project-section">
